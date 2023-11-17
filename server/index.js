@@ -4,12 +4,11 @@ const mongoose = require('mongoose');
 
 const app = express()
 
-const router = require('./routes/documentTemplates')
+const routerTemplate = require('./routes/documentTemplates')
 
 const port = 3000
-app.use(express.json())
 
-
+  app.use(express.json())
 
 
 app.get('/hello', (req, res) => {
@@ -20,9 +19,10 @@ app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
   })
-  
+
+
   // routes
-app.use('/api/documentsTemplates',router )
+app.use('/api',routerTemplate )
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

@@ -2,21 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const documentTextsSchema = new Schema ({
-    _id: {
-        type: Schema.Types.UUID
-    },
+    _id: {type: mongoose.Schema.Types.ObjectId,
+required: true},
     documentStaticText: {
-        pl:{
-            type: String,
-            required: true
-          },
         en:{
             type: String,
             required: true
+          },
+        pl:{
+            type: String,
+            required: true
           }
+
     } 
 });
-
-
-
-module.exports = mongoose.model('DocumentTexts', documentTextsSchema)
+module.exports = mongoose.model('DocumentTextModel', documentTextsSchema, 'documentTexts')
