@@ -1,10 +1,12 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose');
-
+const routerTemplate = require('./routes/documentTemplates')
+const routerCompanyInfo = require('./routes/companyInfo')
+const routerInternship = require('./routes/InternshipRoute')
 const app = express()
 
-const routerTemplate = require('./routes/documentTemplates')
+
 
 const port = 3000
 
@@ -22,7 +24,9 @@ app.use((req, res, next) => {
 
 
   // routes
-app.use('/api',routerTemplate )
+app.use('/api/templates',routerTemplate )
+app.use('/api',routerCompanyInfo )
+app.use('/api/internship',routerInternship )
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
