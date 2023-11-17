@@ -1,5 +1,5 @@
 
-import logo from "../assets/logotyp-weaii-psk-1024x270.png";
+import logo from "../assets/logo/logotyp-weaii-psk-1024x270.png";
 
 import Menu from "./Menu";
 const Navbar = ({data}) => {
@@ -11,7 +11,7 @@ const Navbar = ({data}) => {
         <div id="navbar">
             <div className="content">
                 <div id="logo">
-                    <img id="logo" src={logo}/>
+                    <img id="logo" src={logo} alt="logo"/>
                 </div>
             </div>
         </div>
