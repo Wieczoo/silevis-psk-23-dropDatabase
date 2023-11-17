@@ -1,7 +1,7 @@
 //variables for pdfs
 var pdf = require("pdf-creator-node");
 var fs = require('fs');
-var html = fs.readFileSync('docs/test.html', 'utf8');
+
 
 //express settings
 const express = require('express')
@@ -57,27 +57,62 @@ var apprenticeships ={
 
 let date_ob = new Date();
 
-    var document = {
-    html: html,
-    data: {
-        student: student,
-        cos: "siemano",
-        date: date_ob.getDate()+"."+date_ob.getMonth()+"."+date_ob.getFullYear(),
-        dean: "Roman Stanisław Deniziak",
-        company: company,
-        apprenticeships: apprenticeships,
-        university: university
-    },
-    path: "./output.pdf"
-    };
 
-pdf.create(document, options)
+    
+
+
+
+const podanieFunkcja = () => {
+    var html = fs.readFileSync('docs/podanie.html', 'utf8');
+
+    var podanie = {
+        html: html,
+        data: {
+            student: student,
+            date: date_ob.getDate()+"."+date_ob.getMonth()+"."+date_ob.getFullYear(),
+            company: company,
+            apprenticeships: apprenticeships,
+            university: university
+        },
+        path: "./pdfs/podanie.pdf"
+    }
+    
+    pdf.create(podanie, options)
     .then(res => {
     console.log(res)
     })
     .catch(error => {
     console.error(error)
     });
+}
+
+const umowaFunkcja = () => {
+    var html = fs.readFileSync('docs/umowaOOrganizacjePraktyk.html', 'utf8');
+
+    var umowa = {
+        html: html,
+        data: {
+            student: student,
+            date: date_ob.getDate()+"."+date_ob.getMonth()+"."+date_ob.getFullYear(),
+            dean: "Roman Stanisław Deniziak",
+            company: company,
+            apprenticeships: apprenticeships,
+            university: university
+        },
+        path: "./pdfs/umowaOOrganizacjePraktyk.pdf"
+    };
+    
+    pdf.create(umowa, options)
+    .then(res => {
+    console.log(res)
+    })
+    .catch(error => {
+    console.error(error)
+    });
+}
+
+umowaFunkcja()
+podanieFunkcja()
 
 app.get('/download', function(req, res){
 
