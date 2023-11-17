@@ -1,0 +1,120 @@
+
+
+@font-face {
+    font-family: font;
+    src: url('../assets/font/SWZCONDN.TTF');
+  }
+  
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: font;
+}
+body
+{
+    width: 100vw;
+    height: 100svh;
+    background: rgb(243, 246, 248);
+}
+
+
+.pageTitle
+{
+    margin: 1.5rem 0;
+    width: 100%;
+}
+
+#navbar
+{
+    width: 100%;
+    height: 100px;
+    /* border-bottom: 1px solid #989898; */
+    box-sizing: border-box;
+    background: white;
+    box-shadow: 0px 1px 0px 0px rgba(0 ,0, 0, 0.05);
+    position: relative;
+    z-index: 2;
+}
+
+
+.content
+{
+    width: calc(100% - 100px);
+    height: 100%;
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+#logo
+{
+    height: 100%;
+}
+
+#menuLine
+{
+    width: 100%;
+    height: 50px;
+    background: white;
+}
+
+#menu
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+}
+
+#menu .menuPart
+{
+    width: auto;
+    padding: 0.5rem 3rem;
+    background: transparent;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#menu .menuPart a
+{
+    width: auto;
+    height: auto;
+}
+
+.active
+{
+    background: rgb(243, 246, 248)!important;
+    border-top-right-radius: 20px;
+    border-top-right-radius: 20px;
+    position: relative;
+}
+
+.active::before
+{
+    content: '';
+    position: absolute;
+    left: 0px;
+    height: 100%;
+    background: white;
+    width: 20px;
+    border-bottom-right-radius: 40px;
+    z-index: 2;
+}
+
+.active::after
+{
+    content: '';
+    position: absolute;
+    right: 0px;
+    height: 100%;
+    background: white;
+    width: 20px;
+    border-bottom-left-radius: 40px;
+    z-index: 2;
+
+}

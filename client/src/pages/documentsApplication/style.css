@@ -1,0 +1,79 @@
+#newApplication
+{
+    border-radius: 20px;
+    box-shadow: 0px 1px 0px 0px rgba(0 ,0, 0, 0.05);
+    width: 200px;
+    height: 200px;
+    display: block;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: grey;
+    transition: .3s;
+}
+
+#optionsView 
+{
+    display: flex;
+}
+
+#optionsView div
+{
+    border-radius: 20px;
+    box-shadow: 0px 1px 0px 0px rgba(0 ,0, 0, 0.05);
+    width: 200px;
+    height: 200px;
+    display: block;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white;
+    transition: .3s;
+    margin-right: 1rem;
+    cursor: pointer;
+    background: #EF7A1B;
+}
+
+#optionsView div:hover{
+    background: white;
+    color: #EF7A1B;
+}
+
+.application
+{
+    width: 400px;
+    height: 400px;
+    background: white;
+}
+.application .title
+{
+    width: 100%;
+    height: 50px;
+    color: white;
+    background: #EF7A1B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+.application #container
+{
+    padding: 0.5rem;
+}
+
+.doc
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
