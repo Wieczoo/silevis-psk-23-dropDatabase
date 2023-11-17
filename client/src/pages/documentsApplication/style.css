@@ -1,0 +1,17 @@
+#newApplication
+{
+    border-radius: 20px;
+    border: 1px solid grey;
+    width: 200px;
+    height: 200px;
+    display: block;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: grey;
+
+}
