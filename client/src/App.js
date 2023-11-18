@@ -1,5 +1,7 @@
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { useEffect } from 'react';
+
 import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/auth/LoginPage';
 import ProfilePage from './pages/profile/ProfilePage';
@@ -7,11 +9,11 @@ import DocumentsTemplates from './pages/documentsTemplates/DocumentsTemplates';
 import UniversitySupervisor from './pages/universitySupervisor/UniversitySupervisor';
 import DocumentsTexts from './pages/documentTexts/documentsTexts';
 import DocumentsAppliactionPage from './pages/documentsApplication/DocumentsApplication';
+import Internships from './pages/internships/Internships';
+
 import './styles/main.css';
-import { useEffect } from 'react';
+
 const App = () =>{
-
-
     // useEffect(()=>{
     //     if (localStorage.getItem("lang") === null) {
     //         const defaultLang={
@@ -21,9 +23,6 @@ const App = () =>{
     //     }
        
     // },[])
-
-
-
     return (
         
         <BrowserRouter>
@@ -34,6 +33,7 @@ const App = () =>{
                     <Route path='documents' element={<DocumentsAppliactionPage/>}/>
                     <Route path='profile' element={<ProfilePage/>}/>
                     <Route path='universitysupervisor' element={<UniversitySupervisor/>}/>
+                    <Route path='internships' element={<Internships/>}/>
                     <Route path='documentstexts' element={<DocumentsTexts/>}/>
                 </Route>
                

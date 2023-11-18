@@ -35,6 +35,9 @@ const Menu = ({type}) =>{
             case 'documents':
                 setMenuActive(3);
                 break;
+            case 'internships':
+                setMenuActive(5);
+                break;
             default:
                 setMenuActive(0);
                 break;
@@ -50,6 +53,7 @@ const Menu = ({type}) =>{
                     <>
                     <div className={menuActive==1? "menuPart active" : "menuPart"} onClick={() => { setMenuActive(1);navigate('/dashboard/templates') }}><a>Templates</a></div>
                     <div className={menuActive==2? "menuPart active" : "menuPart"} onClick={() => { setMenuActive(2);navigate('/dashboard/universitysupervisor') }}><a>University Supervisor</a></div>
+                    <div className={menuActive==5? "menuPart active" : "menuPart"} onClick={() => { setMenuActive(5);navigate('/dashboard/internships') }}><a>Internships</a></div>
                     </>
                 ) : (
                     <>
