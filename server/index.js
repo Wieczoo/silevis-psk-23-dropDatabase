@@ -5,6 +5,7 @@ const routerTemplate = require('./routes/documentTemplates')
 const routerCompanyInfo = require('./routes/companyInfo')
 const routerInternship = require('./routes/InternshipRoute')
 const routerApprenticeshipsDates = require('./routes/ApprenticeshipsDatesRoutes')
+const routerInternshipDiary = require('./routes/InternshipDiaryRoutes')
 const app = express()
 
 
@@ -28,7 +29,8 @@ app.use((req, res, next) => {
 app.use('/api/templates',routerTemplate )
 app.use('/api',routerCompanyInfo )
 app.use('/api/internship',routerInternship )
-app.use('/api/ApprenticeshipsDates',routerApprenticeshipsDates)
+app.use('/api/apprenticeshipsdates',routerApprenticeshipsDates)
+app.use('/api/internshipdiary',routerInternshipDiary);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
