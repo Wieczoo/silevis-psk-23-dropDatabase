@@ -42,6 +42,27 @@ const Form = () => {
     endDate: '',
   });
 
+  const fetchData = async (nip) => {
+    try {
+      const response = await axios.get('http://10.5.5.188:3001/api/companyinfo/'+nip);
+      const adres = response.data.result.subject.residenceAddress.split(',')
+
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        company: {
+          ...prevFormData.company,
+          name: response.data.result.subject.name,
+          city: adres[1].substring(7),
+          street: adres[0],
+          krs: response.data.result.subject.krs,
+          regon: response.data.result.subject.regon,
+        },
+      }));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -61,11 +82,6 @@ const Form = () => {
       },
     }));
   };
-
-  const handleNip = (e) =>{
-    setFormData(formData.company)
-  }
-
  
 
   const handleCompanyChange = (e) => {
@@ -87,7 +103,35 @@ const Form = () => {
 
 
   useEffect(() => {
-    console.log(formData.company.nip)
+    const user = JSON.parse(localStorage.getItem('user')) 
+    console.log(user.firstName)
+  
+    if (user) {
+      console.log("User data from localStorage:", user);
+  
+      // Sprawdź, czy istnieją właściwości firstName, lastName i studentNumber
+      if (user.firstName && user.lastName && user.studentNumber) {
+        setFormData((prevData) => ({
+          ...prevData,
+          name: user.firstName,
+          surname: user.lastName,
+          index: user.studentNumber,
+        }));
+      } else {
+        console.error("Brak wymaganych danych użytkownika w localStorage.");
+      }
+    } else {
+      console.error("Brak danych użytkownika w localStorage.");
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(formData.company.nip.length)
+    if(formData.company.nip.length === 10){
+        const companyInfo = fetchData(formData.company.nip)
+        console.log(companyInfo.name)
+        
+    }
   }, [formData.company.nip]);
   
 
@@ -177,6 +221,7 @@ const Form = () => {
       </body>
     </html>
     `;
+
 
     setHtmlContent(html2);
   }, [formData]);
