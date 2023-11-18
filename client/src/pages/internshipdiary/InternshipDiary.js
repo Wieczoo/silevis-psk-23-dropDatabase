@@ -4,14 +4,18 @@ import axios from "axios";
 const InternshipDiary = () =>{
     const [data,setData] = useState();
     const [formData,setFormData] = useState();
-    
+    const [diary,setDiary] = useState();
+    const [Id,setId] = useState();
     useEffect(()=>{
-        const studentNumber = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem('user'));
         
-        axios.get("http://10.5.5.188:3001/api/internshipdiary/index/22222")
+        axios.get("http://10.5.5.188:3001/api/internshipdiary/index/"+user.studentNumber)
         .then((response) => {
+console.log(response.data);
+            setId(response.data[0]._id);
 
             setData(response.data[0]);
+            setDiary(response.data[0].diary);
         })
         .catch((err) => console.log(err));
     },[])
@@ -22,7 +26,14 @@ const InternshipDiary = () =>{
       };
 
       const addNewDate = () => {
-
+        const user = JSON.parse(localStorage.getItem('user'));
+  
+        // Skopiuj istniejące wpisy z tablicy diary do diaryList
+        const diaryList = [...diary];
+        
+        // Dodaj nowy wpis do diaryList
+        diaryList.push({"day": formData.day, "description": formData.description});
+       axios.patch("http://10.5.5.188:3001/api/internshipdiary/"+Id,{"index":user.studentNumber,"diary":diaryList } )
       }
       
 
@@ -35,11 +46,12 @@ const InternshipDiary = () =>{
             </tr>
         </thead>
         <tbody>
-                {data && data.diary.map((item)=>{
-                    <tr>
-                    <td>{item.day}</td><td>{item.description}</td>
-                </tr>
-                })}
+        {diary && diary.map((item) => (
+  <tr key={item.day}>
+    <td>{item.day}</td>
+    <td>{item.description}</td>
+  </tr>
+))}
         </tbody>
        </table>
         <div>
@@ -47,13 +59,10 @@ const InternshipDiary = () =>{
              <input name='day'  onChange={handleChange} type="date"></input>
              <br></br>
              <label>Discription</label>
-            <textarea name='day'  onChange={handleChange} type="text">Discription </textarea>
+            <textarea name='description'  onChange={handleChange} type="text">Discription </textarea>
             <button onClick={()=>{addNewDate()}} type="text">Add </button>
         </div>
        </div>
-       
-
-
     );
 }
 
