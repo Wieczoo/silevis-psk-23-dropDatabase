@@ -8,7 +8,19 @@ import UniversitySupervisor from './pages/universitySupervisor/UniversitySupervi
 import DocumentsTexts from './pages/documentTexts/documentsTexts';
 import DocumentsAppliactionPage from './pages/documentsApplication/DocumentsApplication';
 import './styles/main.css';
+import { useEffect } from 'react';
 const App = () =>{
+
+
+    // useEffect(()=>{
+    //     if (localStorage.getItem("lang") === null) {
+    //         const defaultLang={
+    //             lang:"pl"
+    //         }
+    //         localStorage.setItem(defaultLang);
+    //     }
+       
+    // },[])
 
 
 

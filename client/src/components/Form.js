@@ -4,17 +4,13 @@ import axios from 'axios';
 import icon_close from '../assets/icons/close.png';
 import store from '../utils/store';
 
-const Form = () => {
+const Form = ({applicationID,aplicationType,applicationTitle}) => {
+    console.log(applicationTitle);
+
   const mojDivRef = useRef(null);
   const [htmlContent, setHtmlContent] = useState('');
-
   const [temporaryData,setTemporaryData] = useState();
-
-
   const {closeForm} = useContext(store);
-  
-
-
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
@@ -41,6 +37,9 @@ const Form = () => {
     startDate: '',
     endDate: '',
   });
+
+  const [supervisors, setSupervisors] = useState([]);
+  const [selectedSupervisor, setSelectedSupervisor] = useState([]);
 
   const fetchData = async (nip) => {
     try {
@@ -72,6 +71,40 @@ const Form = () => {
     }));
   };
 
+  const saveDataApplication = () =>{
+
+    axios.patch('http://10.5.5.188:3001/api/internship/'+applicationID,{
+        company:{
+            name: formData.company.name,
+            city: formData.company.city,
+            street: formData.company.street,
+            krs: formData.company.krs,
+            nip: formData.company.nip,
+            regon: formData.company.regon,
+            supervisor:{
+                name: formData.company.supervisorName,
+                surname: formData.company.supervisorSurname,
+                tel: formData.company.supervisorTel.replace,
+                email: formData.company.supervisorEmail
+            }
+        },
+        university:{
+            supervisor:{
+                name: formData.university.supervisorName,
+                surname: formData.university.supervisorSurname,
+                tel: formData.university.supervisorTel,
+                email: formData.university.supervisorEmail
+            }
+        },
+        apprenticeships:{
+            startDate: formData.startDate,
+            endDate: formData.endDate
+        }
+    }).then(function(response){console.log(response)})
+    .catch(function(error){console.log(error)});
+  }
+
+
   const handleUniversityChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -99,12 +132,47 @@ const Form = () => {
     e.preventDefault();
     // Tutaj możesz przekazać dane do innej funkcji lub komponentu, aby je obsłużyć
     console.log('Wysyłanie danych:', formData);
+    saveDataApplication();
+
+
+    axios.post('',{})
+    .then(function(response){})
+    .catch({function(error){console.log(error)}})
+
+    // applicationID
+  };
+
+  
+  const handleSupervisorChange = (event) => {
+    setSelectedSupervisor(event.target.value);
+    const selectedSupervisorTel = event.target.options[event.target.selectedIndex].getAttribute('attr-tel');
+    const selectedSupervisorEmail = event.target.options[event.target.selectedIndex].getAttribute('attr-email');
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      university: {
+        ...prevFormData.company,
+        supervisorEmail: selectedSupervisorEmail,
+        supervisorTel: selectedSupervisorTel 
+      },
+    }));
+    
   };
 
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user')) 
     console.log(user.firstName)
+
+    const fetchSupervisors = async () => {
+      try {
+        const response = await axios.get('http://10.5.5.188:3001/api/universitysupervisor/');
+        setSupervisors(response.data);
+      } catch (error) {
+        console.error('Error fetching supervisors:', error);
+      }
+    };
+
+    fetchSupervisors();
   
     if (user) {
       console.log("User data from localStorage:", user);
@@ -221,9 +289,7 @@ const Form = () => {
       </body>
     </html>
     `;
-
-
-    setHtmlContent(html2);
+    setHtmlContent(html);
   }, [formData]);
 
   return (
@@ -232,7 +298,7 @@ const Form = () => {
         <div id='mainContainer'>
 
           <div id='FormTitle'>
-              <h2>Title</h2>
+              <h2>{aplicationType==1 ? "Podanie o Praktyki": "Podanie o Zaliczenie"}  {applicationTitle}</h2>
               <img id='close' src={icon_close} alt="close" onClick={closeForm}></img>
           </div>
           <div id='formInputs' ref={mojDivRef}>
@@ -248,25 +314,15 @@ const Form = () => {
         <label htmlFor="index">Numer indeksu:</label>
         <input type="text" id="index" name="index" value={formData.index} onChange={handleChange} required />
 
-        <label htmlFor="supervisorName">Imię opiekuna uniwersytetu:</label>
-        <input
-          type="text"
-          id="supervisorName"
-          name="supervisorName"
-          value={formData.university.supervisorName}
-          onChange={handleUniversityChange}
-          required
-        />
-
-        <label htmlFor="supervisorSurname">Nazwisko opiekuna uniwersytetu:</label>
-        <input
-          type="text"
-          id="supervisorSurname"
-          name="supervisorSurname"
-          value={formData.university.supervisorSurname}
-          onChange={handleUniversityChange}
-          required
-        />
+        <label htmlFor="supervisor">Imię i nazwisko opiekuna uniwersytetu:</label>
+        <select id="supervisorSelect" value={selectedSupervisor} onChange={handleSupervisorChange}>
+        <option value="">Select a supervisor</option>
+        {supervisors.map((supervisor) => (
+          <option key={supervisor.id} value={supervisor.id} attr-tel={supervisor.tel} attr-email={supervisor.email}>
+            {`${supervisor.name} ${supervisor.surname}`}
+          </option>
+        ))}
+      </select>
 
         <label htmlFor="supervisorEmail">Email opiekuna uniwersytetu:</label>
         <input
