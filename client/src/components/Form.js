@@ -1,10 +1,9 @@
 import '../styles/form.css';
-<<<<<<< Updated upstream
+
 import React, { useRef, useEffect, useState, useContext } from 'react';
-=======
-import React, { useRef, useEffect, useState } from 'react';
+
 import axios from 'axios';
->>>>>>> Stashed changes
+
 
 import icon_close from '../assets/icons/close.png';
 import store from '../utils/store';
@@ -13,14 +12,12 @@ const Form = () => {
   const mojDivRef = useRef(null);
   const [htmlContent, setHtmlContent] = useState('');
 
-<<<<<<< Updated upstream
+
 
   const {closeForm} = useContext(store);
   
 
 
-=======
->>>>>>> Stashed changes
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
@@ -48,7 +45,7 @@ const Form = () => {
     endDate: '',
   });
 
-  const fetchData = async (nip) => {
+const fetchData = async (nip) => {
     try {
       const response = await axios.get('http://10.5.5.188:3001/api/companyinfo/'+nip);
       const adres = response.data.result.subject.residenceAddress.split(',')
@@ -89,15 +86,10 @@ const Form = () => {
     }));
   };
 
-<<<<<<< Updated upstream
   const handleNip = (e) =>{
     setFormData(formData.company)
   }
 
- 
-
-=======
->>>>>>> Stashed changes
   const handleCompanyChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -210,16 +202,12 @@ const Form = () => {
   return (
     <div id='formBg'>
       <div id="formView">
-        <div id='mainContainer'>
-
-          <div id='FormTitle'>
-              <h2>Title</h2>
-              <img id='close' src={icon_close} alt="close" onClick={closeForm}></img>
-          </div>
+        <div>
+          <div>titel</div>
           <div id='formInputs' ref={mojDivRef}>
           <div>
-      <h3>Formularz</h3>
-      <form id='formInputsContainer' onSubmit={handleSubmit}>
+      <h2>Formularz</h2>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="name">Imię:</label>
         <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
 
@@ -344,7 +332,7 @@ const Form = () => {
           <div id='formPreview' dangerouslySetInnerHTML={{ __html: htmlContent }}></div>
         </div>
       </div>
-     
+      <div id='acceptanceForm'><button>Save</button></div>
     </div>
   );
 }
