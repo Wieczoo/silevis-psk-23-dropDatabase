@@ -1,5 +1,10 @@
 import '../styles/form.css';
+<<<<<<< Updated upstream
 import React, { useRef, useEffect, useState, useContext } from 'react';
+=======
+import React, { useRef, useEffect, useState } from 'react';
+import axios from 'axios';
+>>>>>>> Stashed changes
 
 import icon_close from '../assets/icons/close.png';
 import store from '../utils/store';
@@ -8,11 +13,14 @@ const Form = () => {
   const mojDivRef = useRef(null);
   const [htmlContent, setHtmlContent] = useState('');
 
+<<<<<<< Updated upstream
 
   const {closeForm} = useContext(store);
   
 
 
+=======
+>>>>>>> Stashed changes
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
@@ -40,6 +48,27 @@ const Form = () => {
     endDate: '',
   });
 
+  const fetchData = async (nip) => {
+    try {
+      const response = await axios.get('http://10.5.5.188:3001/api/companyinfo/'+nip);
+      const adres = response.data.result.subject.residenceAddress.split(',')
+
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        company: {
+          ...prevFormData.company,
+          name: response.data.result.subject.name,
+          city: adres[1].substring(7),
+          street: adres[0],
+          krs: response.data.result.subject.krs,
+          regon: response.data.result.subject.regon,
+        },
+      }));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,12 +89,15 @@ const Form = () => {
     }));
   };
 
+<<<<<<< Updated upstream
   const handleNip = (e) =>{
     setFormData(formData.company)
   }
 
  
 
+=======
+>>>>>>> Stashed changes
   const handleCompanyChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -85,7 +117,12 @@ const Form = () => {
 
 
   useEffect(() => {
-    console.log(formData.company.nip)
+    console.log(formData.company.nip.length)
+    if(formData.company.nip.length === 10){
+        const companyInfo = fetchData(formData.company.nip)
+        console.log(companyInfo.name)
+        
+    }
   }, [formData.company.nip]);
   
 
