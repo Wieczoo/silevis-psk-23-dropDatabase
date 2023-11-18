@@ -1,5 +1,7 @@
 import '../styles/form.css';
+
 import React, { useRef, useEffect, useState, useContext } from 'react';
+
 import axios from 'axios';
 import icon_close from '../assets/icons/close.png';
 import store from '../utils/store';
@@ -9,6 +11,7 @@ const Form = () => {
   const [htmlContent, setHtmlContent] = useState('');
 
   const [temporaryData,setTemporaryData] = useState();
+
 
 
   const {closeForm} = useContext(store);
@@ -42,6 +45,27 @@ const Form = () => {
     endDate: '',
   });
 
+const fetchData = async (nip) => {
+    try {
+      const response = await axios.get('http://10.5.5.188:3001/api/companyinfo/'+nip);
+      const adres = response.data.result.subject.residenceAddress.split(',')
+
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        company: {
+          ...prevFormData.company,
+          name: response.data.result.subject.name,
+          city: adres[1].substring(7),
+          street: adres[0],
+          krs: response.data.result.subject.krs,
+          regon: response.data.result.subject.regon,
+        },
+      }));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,8 +90,6 @@ const Form = () => {
     setFormData(formData.company)
   }
 
- 
-
   const handleCompanyChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -87,7 +109,12 @@ const Form = () => {
 
 
   useEffect(() => {
-    console.log(formData.company.nip)
+    console.log(formData.company.nip.length)
+    if(formData.company.nip.length === 10){
+        const companyInfo = fetchData(formData.company.nip)
+        console.log(companyInfo.name)
+        
+    }
   }, [formData.company.nip]);
   
 
@@ -184,16 +211,12 @@ const Form = () => {
   return (
     <div id='formBg'>
       <div id="formView">
-        <div id='mainContainer'>
-
-          <div id='FormTitle'>
-              <h2>Title</h2>
-              <img id='close' src={icon_close} alt="close" onClick={closeForm}></img>
-          </div>
+        <div>
+          <div>titel</div>
           <div id='formInputs' ref={mojDivRef}>
           <div>
-      <h3>Formularz</h3>
-      <form id='formInputsContainer' onSubmit={handleSubmit}>
+      <h2>Formularz</h2>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="name">Imię:</label>
         <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
 
@@ -318,7 +341,7 @@ const Form = () => {
           <div id='formPreview' dangerouslySetInnerHTML={{ __html: htmlContent }}></div>
         </div>
       </div>
-     
+      <div id='acceptanceForm'><button>Save</button></div>
     </div>
   );
 }
