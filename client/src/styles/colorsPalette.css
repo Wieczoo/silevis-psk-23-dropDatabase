@@ -1,0 +1,9 @@
+:root{
+    --mainBgWhite: white;
+    --mainBgLightgrey:rgb(244, 246, 248);
+    --mainBgDarkGrey:#818181;
+    --mainBgOrange:#EF7A1B;
+    --mainBgDarkOrange:#bf6115;
+
+    --mainBoxShadow: box-shadow: 0px 1px 0px 0px rgba(0 ,0, 0, 0.05);
+}

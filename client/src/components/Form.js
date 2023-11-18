@@ -4,7 +4,7 @@ import axios from 'axios';
 import icon_close from '../assets/icons/close.png';
 import store from '../utils/store';
 
-const Form = ({applicationID,aplicationType,applicationTitle}) => {
+const Form = ({applicationID,applicationType, applicationTitle}) => {
     console.log(applicationTitle);
 
   const mojDivRef = useRef(null);
@@ -298,7 +298,7 @@ const Form = ({applicationID,aplicationType,applicationTitle}) => {
         <div id='mainContainer'>
 
           <div id='FormTitle'>
-              <h2>{aplicationType==1 ? "Podanie o Praktyki": "Podanie o Zaliczenie"}  {applicationTitle}</h2>
+              <h2>{applicationType==2 ? "Podanie o Praktyki": "Podanie o Zaliczenie"}  {applicationTitle}</h2>
               <img id='close' src={icon_close} alt="close" onClick={closeForm}></img>
           </div>
           <div id='formInputs' ref={mojDivRef}>

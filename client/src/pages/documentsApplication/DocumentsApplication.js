@@ -19,6 +19,7 @@ const DocumentsAppliactionPage = () =>{
     const [formView, setFormView] = useState(false);
     const [myApplications, setMyApplications] = useState([]);
     const [applicationId, setApplicationId] = useState();
+    const [applcationDocumentTitle, setApplcationDocumentTitle] = useState();
 
     const [applicationTitle,setApplicationTitle] = useState(false);
     const [applicationType, setApplicationType] = useState();
@@ -41,8 +42,9 @@ const DocumentsAppliactionPage = () =>{
         setRefresh(true);
     }
 
-    const openForm = (id) => {
+    const openForm = (id,x,title) => {
         setApplicationId(id);
+        setApplcationDocumentTitle(title);
         setFormView(true);
         
     }
@@ -84,11 +86,11 @@ const DocumentsAppliactionPage = () =>{
         })
         .catch(function(error){console.log(error)});
 
-        axios.get('http://10.5.5.188:3001/api/documentstemplates')
-        .then((response) =>{
-            console.log(response.data);
-            setApplicationType(response.data);
-        }).catch(function(error){console.log(error)});
+        // axios.get('http://10.5.5.188:3001/api/documentstemplates')
+        // .then((response) =>{
+        //     console.log(response.data);
+        //     setApplicationType(response.data);
+        // }).catch(function(error){console.log(error)});
     },[refresh]);
 
     const DeleteApplication = (id) =>{
@@ -118,7 +120,19 @@ const DocumentsAppliactionPage = () =>{
                             </div>
                             <div id='container'>
                                 <a>Wymagane dokumenty:</a>
-                                {applicationType[item.applianceType-1].textOrder.map((item2,index)=>{
+                                {item.form1.map((item,index)=>{
+                                    return(
+                                        <div className='doc' key={index}>
+                                                <p onClick={()=>{openForm(item._id,item.applianceType,item)}}>{item.docTitle}</p>
+                                                <div className='status'>
+                                                    <img src={icon_possitive} alt="possitive"/>
+                                                    <img src={icon_download} alt="possitive"/>
+                                                    
+                                                    </div>
+                                            </div>
+                                    );
+                                })}
+                                {/* {applicationType[item.applianceType-1].textOrder.map((item2,index)=>{
                                         return(
                                             <div className='doc' key={index}>
                                                 <p onClick={()=>{openForm(item._id,item.applianceType,item2)}}>{item2}</p>
@@ -129,7 +143,7 @@ const DocumentsAppliactionPage = () =>{
                                                     </div>
                                             </div>
                                         );
-                                })}
+                                })} */}
                             </div>
                         </div>
                         </>
@@ -148,27 +162,8 @@ const DocumentsAppliactionPage = () =>{
                     )}
                 </div>}
                 </div>
-                {/* {applianceView &&
-                    <div className='application'>
-                        <div className='title'>Title</div>
-                        <div id='container'>
-                            <a>Wymagane dokumenty:</a>
-                            <div className='doc'>
-                                <a onClick={()=>{openForm()}}>Wniosek</a>
-                                <div className='status'><input type='checkbox'/></div>
-                            </div>
-
-                            <div className='doc'>
-                                <a>Wniosek</a>
-                                <div className='status'><input type='checkbox'/></div>
-                            </div>
-                        </div>
-                    </div>
-                } */}
-
-
             </div>
-            {formView && <Form applicationID={applicationId}/>}
+            {formView && <Form applicationID={applicationId} title={applcationDocumentTitle}/>}
             </store.Provider>
         </>
     );
