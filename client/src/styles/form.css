@@ -26,3 +26,25 @@
     background: white;
     margin-left: 2rem;
 }
+#title{
+    width: 100%;
+    height: 5%;
+    background-color: red;
+    text-align: center;
+}
+
+#formInputs{
+    float: left;
+    width: 60%;
+    height: 67.7vh;
+    background-color: gray;
+}
+
+
+#formPreview{
+    overflow-y: scroll;
+    float: left;
+    width: 40%;
+    height: 67.7vh;
+    background-color: gainsboro;
+}
