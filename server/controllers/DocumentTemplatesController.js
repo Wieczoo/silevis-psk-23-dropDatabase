@@ -1,30 +1,21 @@
-const DocumentTextModel = require("../models/documentTemplatesModel");
+const DocumentTemplatesModel = require("../models/documentTemplatesModel");
 const mongoose = require('mongoose');
 const ObjectId  = require('mongodb').ObjectId;
-const getDocumentTemplates = async (req, res) => {
-    const allDocumentTextModel = await DocumentTextModel.find({});
-    console.log(allDocumentTextModel);
-    return res.status(200).json(allDocumentTextModel);
-
+const getAllDocumentTemplates = async (req, res) => {
+    const allDocumentTemplatesModel = await DocumentTemplatesModel.find({});
+    return res.status(200).json(allDocumentTemplatesModel);
   }
 
 
   const createDocumentTemplates = async (req, res) => {
+    const {title,textOrder} = req.body;
+    const _id = new ObjectId()
     try {
-      console.log(req.body);
-    console.log('1');
-    let newDocumentTexts = {};
-    newDocumentTexts._id =  new ObjectId();
-    newDocumentTexts.title =  req.body.title;
-    newDocumentTexts.documentStaticText = {};
-    newDocumentTexts.documentStaticText.pl = req.body.documentStaticText.pl;
-    newDocumentTexts.documentStaticText.en = req.body.documentStaticText.en;
-    const newDocumentTextsa = new DocumentTextModel(newDocumentTexts)
-    await newDocumentTextsa.save();
-    res.status(200).send(newDocumentTextsa);
-    } catch (error) {
-      res.status(400).json(error)
-    }
+        const DocumentTemplates = await DocumentTemplatesModel.create({_id,title,textOrder})
+        res.status(200).json(DocumentTemplates)
+      } catch (error) {
+        res.status(400).json({ error: error.message })
+      }
   }
   const getSingleDocumentTemplates = async (req, res) => {
     const { id } = req.params
@@ -33,28 +24,29 @@ const getDocumentTemplates = async (req, res) => {
       return res.status(404).json({error: 'No such workout'})
     }
   
-    const DocumentText = await DocumentTextModel.findById(id)
+    const DocumentTemplates = await DocumentTemplatesModel.findById(id)
   
-    if (!DocumentText) {
+    if (!DocumentTemplates) {
       return res.status(404).json({error: 'No such workout'})
     }
   
-    res.status(200).json(DocumentText)
+    res.status(200).json(DocumentTemplates)
   };
-  const deleteDocumentTemplates = async (req, res) => {
+
+  const deleteSingleDocumentTemplates = async (req, res) => {
     const { id } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({error: 'No such workout'})
     }
   
-    const DocumentText = await DocumentTextModel.findOneAndDelete({_id: id})
+    const DocumentTemplates = await DocumentTemplatesModel.findOneAndDelete({_id: id})
   
-    if(!DocumentText) {
+    if(!DocumentTemplates) {
       return res.status(400).json({error: 'No such workout'})
     }
   
-    res.status(200).json(DocumentText)
+    res.status(200).json(DocumentTemplates)
   };
 
   const updateDocumentTemplates = async (req, res) => {
@@ -63,26 +55,18 @@ const { id } = req.params
     return res.status(400).json({error: 'No such workout'})
   }
 
-  const DocumentText = await DocumentTextModel.findOneAndUpdate(
-    { _id: id },
-    {
-      $set: {
-        'documentStaticText.en': req.body.documentStaticText.en,
-        'documentStaticText.pl': req.body.documentStaticText.pl
-      },
-      title: req.body.title
-    },
-    { upsert: true, new: true }
-  );
+  const DocumentTemplates = await DocumentTemplatesModel.findOneAndUpdate({_id: id}, {
+    ...req.body
+  })
 
-  if (!DocumentText) {
+  if (!DocumentTemplates) {
     return res.status(400).json({error: 'No such workout'})
   }
 
-  res.status(200).json(DocumentText)
+  res.status(200).json(DocumentTemplates)
   };
 
 
 module.exports = {
-  getDocumentTemplates,createDocumentTemplates,getSingleDocumentTemplates,deleteDocumentTemplates,updateDocumentTemplates
+    getAllDocumentTemplates,createDocumentTemplates,getSingleDocumentTemplates,deleteSingleDocumentTemplates,updateDocumentTemplates
 }
