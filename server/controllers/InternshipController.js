@@ -17,7 +17,6 @@ const getAllInternshipData = async (req, res) => {
     const newInternshipDataModel = new InternshipDataModel(internshipDataModel)
     await newInternshipDataModel.save();
     res.status(200).send(newInternshipDataModel);
-  console.log("0");
   //const internshipDataInstance = new InternshipDataModel(newInternshipData);
 
   }
