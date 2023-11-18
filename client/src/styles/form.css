@@ -41,6 +41,17 @@
     overflow-y: scroll;
 }
 
+#formInputs2{
+    float: left;
+    width: 60%;
+    height: calc(100% - 50px - 1rem);
+    background-color: white;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-right: 1px solid #989898;
+    overflow-y: scroll;
+}
+
 
 #formPreview{
     overflow-y: scroll;
