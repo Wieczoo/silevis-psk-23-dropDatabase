@@ -38,7 +38,7 @@ console.log(response.data);
       
 
     return(
-       <div>
+       <div className="content">
        <table>
         <thead>
             <tr>
