@@ -21,6 +21,9 @@ const Form = ({applicationID,applicationType, Title}) => {
     name: '',
     surname: '',
     index: '',
+    pesesl: '',
+    tel: '',
+    fieldOfStudy: '',
     university: {
         supervisorName: '',
         supervisorSurname: '',
@@ -32,6 +35,7 @@ const Form = ({applicationID,applicationType, Title}) => {
       name: '',
       city: '',
       street: '',
+      zipCode: '',
       krs: '',
       nip: '',
       regon: '',
@@ -48,9 +52,6 @@ const Form = ({applicationID,applicationType, Title}) => {
   const [selectedSupervisor, setSelectedSupervisor] = useState([]);
 
 
-  useEffect(() => {
-    
-  }, [docTitle]);
 
   const fetchData = async (nip) => {
     try {
@@ -64,6 +65,7 @@ const Form = ({applicationID,applicationType, Title}) => {
           name: response.data.result.subject.name,
           city: adres[1].substring(7),
           street: adres[0],
+          zipCode: adres[1].substring(0,7),
           krs: response.data.result.subject.krs,
           regon: response.data.result.subject.regon,
         },
@@ -231,16 +233,70 @@ const Form = ({applicationID,applicationType, Title}) => {
 
     const currentDate = day+"."+month+"."+year+"r."
     const html2 = temporaryData
-/*
-    switch (expr) {
-      case 'Oranges':
-        console.log('Oranges are $0.59 a pound.');
-        break;
-      case 'Mangoes':
-      case 'Papayas':
-*/
 
-
+    const html3 = `<!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8" />
+        <title>Zarz_R_54_19_zal_1</title>
+      </head>
+      <body>
+      <div style="margin: 1vw">
+        <div style="float: left; width: 40%; margin-bottom: 100px; line-height: 1.5; font-size: 0.7vw">
+            <p>
+                <b>${formData.name} ${formData.surname}</b><br>
+                Pesel: <b>${formData.pesel}</b><br>
+                Adres: <b> ${formData.adres} </b><br>
+                Nr. telefonu: <b>${formData.tel}</b><br>
+                Kierunek studiów <b>${formData.fieldOfStudy}</b><br>
+            </p>
+        </div>
+            
+        <div style="float: right; width: 60%; text-align: right; margin-bottom: 140px; font-size: 0.7vw">
+          <p>Kielce, ${currentDate}</p>
+        </div>
+        
+    
+        <div >
+          <p style="text-align: center; line-height: 1.5; font-size: 0.7vw">
+            <b>Kierownik<br>
+            ds.praktyk studenckich<br>
+            ${formData.university.supervisorName} ${formData.university.supervisorSurname} </b>
+          </p>
+        </div>
+          
+        <div style=" margin-top: 1vw">
+          <p style="text-align: center; font-size: 0.8vw";>
+            <b>Podanie<br></b>
+          </p>
+          <p style="text-align: left; line-height: 1.5; font-size: 0.7vw">
+            &#9;Uprzejmie proszę o wyrażenie zgody na realizację czterotygodniowej praktyki studenckiej w zakładzie:
+          </p>
+          <p style="text-align: center; line-height: 1.5; font-size: 0.7vw">
+            <b>
+            ${formData.company.name} ${formData.company.street} ${formData.company.zipCode} ${formData.company.city}<br>
+            </b>
+              Przedstawiciel zakładu: <b>${formData.company.supervisorName} ${formData.company.supervisorSurname} ${formData.company.supervisorTel}</b><br>
+              Zakładowy opiekun praktyk: <b>${formData.company.supervisorName} ${formData.company.supervisorSurname}</b> <br>
+              Data stażu: <b>${formData.startDate} ${formData.endDate}</b> <br>
+          </p>
+        </div>
+    
+        <div style="float:right; margin-top: 30px;">
+          <p style="text-align: center; font-size: 0.7vw">
+            Z poważaniem<br>
+          </p>
+          <p style="text-align: center; margin-top: 40px; font-size: 0.7vw">
+            .....................................................<br>
+          </p>  
+          <p style="text-align: center; font-size: 0.7vw">
+            podpis studenta
+          </p>
+        </div>
+        
+      </div>
+      </body>
+    </html>`
 
     const html = `
     <!DOCTYPE html>
@@ -314,8 +370,7 @@ const Form = ({applicationID,applicationType, Title}) => {
 
     if(docTitle === "Wniosek na wyrażenie zgody na realizację praktyki"){
       setVisible1(false)
-      console.log("widocznosc", visible1)
-      setHtmlContent(" ");
+      setHtmlContent(html3);
       
     }else{
       setVisible1(true) 
@@ -326,6 +381,7 @@ const Form = ({applicationID,applicationType, Title}) => {
   }, [formData]);
 
 
+//style={{ visibility: visible1 ? "visible" : "hidden" }}
 
   return (
     <div id='formBg'>
@@ -336,29 +392,57 @@ const Form = ({applicationID,applicationType, Title}) => {
               <h2>{applicationType==2 ? "Podanie o Praktyki": "Podanie o Zaliczenie"}  {Title}</h2>
               <img id='close' src={icon_close} alt="close" onClick={closeForm}></img>
           </div>
-          <div id='formInputs' ref={mojDivRef} style={{ visibility: visible1 ? "visible" : "hidden" }}>
+          <div id='formInputs' ref={mojDivRef} >
           <div>
       <h3>Formularz</h3>
-      <form id='formInputsContainer' onSubmit={handleSubmit}>
+      <form id='formInputsContainer' onSubmit={handleSubmit} >
         <label htmlFor="name">Imię:</label>
-        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange}  />
 
         <label htmlFor="surname">Nazwisko:</label>
-        <input type="text" id="surname" name="surname" value={formData.surname} onChange={handleChange} required />
+        <input type="text" id="surname" name="surname" value={formData.surname} onChange={handleChange}  />
 
+        {visible1 && (
+      <>
         <label htmlFor="index">Numer indeksu:</label>
-        <input type="text" id="index" name="index" value={formData.index} onChange={handleChange} required />
+        <input
+          type="text"
+          id="index"
+          name="index"
+          value={formData.index}
+          onChange={handleChange}
+        />
+      </>
+    )}
+
+{!visible1 && (
+      <>
+        <label htmlFor="pesel">Numer pesel:</label>
+        <input type="text" id="pesel" name="pesel" value={formData.pesel} onChange={handleChange} />
+
+        <label htmlFor="tel">Numer telefonu:</label>
+        <input type="text" id="tel" name="tel" value={formData.tel} onChange={handleChange} />
+
+        <label htmlFor="adres">Adres</label>
+        <input type="text" id="adres" name="adres" value={formData.adres} onChange={handleChange}  />
+
+        <label htmlFor="fieldOfStudy">Kierunek studiów</label>
+        <input type="text" id="fieldOfStudy" name="fieldOfStudy" value={formData.fieldOfStudy} onChange={handleChange}  />
+      </>
+    )}
 
         <label htmlFor="supervisor">Imię i nazwisko opiekuna uniwersytetu:</label>
         <select id="supervisorSelect" value={selectedSupervisor} onChange={handleSupervisorChange}>
         <option value="">Select a supervisor</option>
         {supervisors.map((supervisor) => (
-          <option key={supervisor.id} value={supervisor.id} attr-tel={supervisor.tel} attr-email={supervisor.email}>
+          <option key={supervisor.id} value={supervisor.id} attr-tel={supervisor.tel} attr-email={supervisor.email}  >
             {`${supervisor.name} ${supervisor.surname}`}
           </option>
         ))}
       </select>
 
+      {visible1 && (
+      <>
         <label htmlFor="supervisorEmail">Email opiekuna uniwersytetu:</label>
         <input
           type="email"
@@ -366,39 +450,41 @@ const Form = ({applicationID,applicationType, Title}) => {
           name="supervisorEmail"
           value={formData.university.supervisorEmail}
           onChange={handleUniversityChange}
-          required
+          
         />
 
-        <label htmlFor="supervisorTel">Telefon opiekuna uniwersytetu:</label>
+<label htmlFor="supervisorTel">Telefon opiekuna uniwersytetu:</label>
         <input
           type="tel"
           id="supervisorTel"
           name="supervisorTel"
           value={formData.university.supervisorTel}
           onChange={handleUniversityChange}
-          required
+          
         />
 
-        <label htmlFor="dean">Dziekan uniwersytetu:</label>
-        <input type="text" id="dean" name="dean" value={formData.university.dean} onChange={handleUniversityChange} required />
+    <label htmlFor="dean">Dziekan uniwersytetu:</label>
+        <input type="text" id="dean" name="dean" value={formData.university.dean} onChange={handleUniversityChange}  />
+      </>
+    )}
+        
+        <label htmlFor="companyNIP">Numer NIP firmy:</label>
+        <input type="text" id="companyNIP" name="nip" value={formData.company.nip} onChange={handleCompanyChange}  />
 
         <label htmlFor="companyName">Nazwa firmy:</label>
-        <input type="text" id="companyName" name="name" value={formData.company.name} onChange={handleCompanyChange} required />
+        <input type="text" id="companyName" name="name" value={formData.company.name} onChange={handleCompanyChange}  />
 
         <label htmlFor="companyCity">Miasto firmy:</label>
-        <input type="text" id="companyCity" name="city" value={formData.company.city} onChange={handleCompanyChange} required />
+        <input type="text" id="companyCity" name="city" value={formData.company.city} onChange={handleCompanyChange}  />
 
         <label htmlFor="companyStreet">Ulica firmy:</label>
-        <input type="text" id="companyStreet" name="street" value={formData.company.street} onChange={handleCompanyChange} required />
+        <input type="text" id="companyStreet" name="street" value={formData.company.street} onChange={handleCompanyChange}  />
 
         <label htmlFor="companyKRS">Numer KRS firmy:</label>
-        <input type="text" id="companyKRS" name="krs" value={formData.company.krs} onChange={handleCompanyChange} required />
-
-        <label htmlFor="companyNIP">Numer NIP firmy:</label>
-        <input type="text" id="companyNIP" name="nip" value={formData.company.nip} onChange={handleCompanyChange} required />
+        <input type="text" id="companyKRS" name="krs" value={formData.company.krs} onChange={handleCompanyChange}  />
 
         <label htmlFor="companyRegon">Numer REGON firmy:</label>
-        <input type="text" id="companyRegon" name="regon" value={formData.company.regon} onChange={handleCompanyChange} required />
+        <input type="text" id="companyRegon" name="regon" value={formData.company.regon} onChange={handleCompanyChange}  />
 
         <label htmlFor="companySupervisorName">Imię opiekuna firmy:</label>
         <input
@@ -407,7 +493,7 @@ const Form = ({applicationID,applicationType, Title}) => {
           name="supervisorName"
           value={formData.company.supervisorName}
           onChange={handleCompanyChange}
-          required
+          
         />
 
         <label htmlFor="companySupervisorSurname">Nazwisko opiekuna firmy:</label>
@@ -417,9 +503,12 @@ const Form = ({applicationID,applicationType, Title}) => {
           name="supervisorSurname"
           value={formData.company.supervisorSurname}
           onChange={handleCompanyChange}
-          required
+          
         />
 
+
+{visible1 && (
+      <>
         <label htmlFor="companySupervisorEmail">Email opiekuna firmy:</label>
         <input
           type="email"
@@ -427,8 +516,11 @@ const Form = ({applicationID,applicationType, Title}) => {
           name="supervisorEmail"
           value={formData.company.supervisorEmail}
           onChange={handleCompanyChange}
-          required
+          
         />
+      </>
+    )}
+        
 
         <label htmlFor="companySupervisorTel">Telefon opiekuna firmy:</label>
         <input
@@ -437,20 +529,22 @@ const Form = ({applicationID,applicationType, Title}) => {
           name="supervisorTel"
           value={formData.company.supervisorTel}
           onChange={handleCompanyChange}
-          required
+          
         />
 
         <label htmlFor="startDate">Data rozpoczęcia praktyki:</label>
-        <input type="date" id="startDate" name="startDate" value={formData.startDate} onChange={handleChange} required />
+        <input type="date" id="startDate" name="startDate" value={formData.startDate} onChange={handleChange}  />
 
         <label htmlFor="endDate">Data zakończenia praktyki:</label>
-        <input type="date" id="endDate" name="endDate" value={formData.endDate} onChange={handleChange} required />
+        <input type="date" id="endDate" name="endDate" value={formData.endDate} onChange={handleChange}  />
 
         <button type="submit">Submit</button>
       </form>
-    </div>
+
+      </div>
       
-          </div>
+      </div>
+          
           <div id='formPreview' dangerouslySetInnerHTML={{ __html: htmlContent }}></div>
         </div>
       </div>
