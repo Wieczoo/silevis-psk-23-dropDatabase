@@ -2,7 +2,7 @@ const {getDocumentTemplates,
     createDocumentTemplates,
     getSingleDocumentTemplates,
     deleteDocumentTemplates,
-    updateDocumentTemplates} = require("../controllers/DocumentTemplatesController");
+    updateDocumentTemplates} = require("../controllers/DocumentTextController");
 const express = require('express')
 
 const router = express.Router()
