@@ -9,8 +9,10 @@ import DocumentsTemplates from './pages/documentsTemplates/DocumentsTemplates';
 import UniversitySupervisor from './pages/universitySupervisor/UniversitySupervisor';
 import DocumentsTexts from './pages/documentTexts/documentsTexts';
 import DocumentsAppliactionPage from './pages/documentsApplication/DocumentsApplication';
+
 import Internships from './pages/internships/Internships';
 
+import InternshipDiary from './pages/internshipdiary/InternshipDiary';
 import './styles/main.css';
 
 const App = () =>{
@@ -35,6 +37,7 @@ const App = () =>{
                     <Route path='universitysupervisor' element={<UniversitySupervisor/>}/>
                     <Route path='internships' element={<Internships/>}/>
                     <Route path='documentstexts' element={<DocumentsTexts/>}/>
+                    <Route path='internshipdiary' element={<InternshipDiary/>}/>
                 </Route>
                
 

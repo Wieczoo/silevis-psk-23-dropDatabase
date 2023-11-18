@@ -4,6 +4,8 @@ import axios from "axios";
 import './style.css';
 
 import icon_downArrow from '../../assets/icons/down.png';
+import icon_company from '../../assets/icons/office.png';
+import icon_folder from '../../assets/icons/folder.png';
 
 const Internships = () => {
   const [internships, setInternships] = useState();
@@ -12,7 +14,7 @@ const Internships = () => {
 
   useEffect(() => {
     axios.get('http://10.5.5.188:3001/api/internship')
-      .then(function (response) { setInternships(response.data); })
+      .then(function (response) { console.log(response.data);setInternships(response.data); })
       .catch(function (error) { console.log(error) });
   }, [])
 
@@ -22,6 +24,12 @@ const Internships = () => {
       return isRowExpanded ? prev.filter((rowIndex) => rowIndex !== index) : [...prev, index];
     });
   };
+
+  const DeleteApplication = (id) =>{
+    axios.delete('http://10.5.5.188:3001/api/internship/'+id)
+    .then(function(response){console.log(response.data);})
+    .catch(function(error){console.log(error)});
+}
 
   return (
     <>
@@ -45,11 +53,11 @@ const Internships = () => {
                 <tr>
                   <td>{index + 1}</td>
                   <td>{item.student.index}</td>
-                  <td></td>
+                  <td>{item.student.fieldOfStudy}</td>
                   <td></td>
                   <td>
                     <button>Zatwierdź</button>
-                    <button>Usuń</button>
+                    <button onClick={()=>{DeleteApplication(item._id)}}>Usuń</button>
                     <button onClick={() => toggleRow(index)}>
                       <img src={icon_downArrow} alt="arrowDown" />
                     </button>
@@ -58,8 +66,24 @@ const Internships = () => {
                 {expandedRows.includes(index) && (
                   <tr className="hidden">
                     <td colSpan="5">
-                        <span></span>
-                        <span></span>
+                        <div>
+                            {item.form1.map((item,index)=>{
+                                return(
+                                    <p>
+                                        <img src={icon_folder} alt="folder"/>
+                                    {item.docTitle}
+                                    </p>
+                                );
+                            })}
+                        </div>
+                        <div>
+                            <p> <img src={icon_company} alt="company"/>{item.company.name}</p>
+                            <p> <img src={icon_company} alt="company"/>{item.company.city}</p>
+                            <p> <img src={icon_company} alt="company"/>{item.company.krs}</p>
+                            <p> <img src={icon_company} alt="company"/>{item.company.nip}</p>
+                        </div>
+                       
+
                     </td>
                   </tr>
                 )}

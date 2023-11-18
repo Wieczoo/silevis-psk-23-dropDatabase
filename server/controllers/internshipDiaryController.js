@@ -7,6 +7,18 @@ const getAllInternshipDiary = async (req, res) => {
   }
 
 
+  const getSingleInternshipDiaryByIndex = async(req, res) => {
+    const { index } = req.params
+
+    const InternshipDiary = await InternshipDiaryModel.find({ 'index': index })
+  
+    if (!InternshipDiary) {
+      return res.status(404).json({error: 'No such workout'})
+    }
+  
+    res.status(200).json(InternshipDiary)
+  }
+
   const createInternshipDiary = async (req, res) => {
     const {index,diary} = req.body;
     const _id = new ObjectId()
@@ -68,5 +80,5 @@ const { id } = req.params
 
 
 module.exports = {
-    getAllInternshipDiary,createInternshipDiary,getSingleInternshipDiary,deleteInternshipDiary,updateInternshipDiary
+    getAllInternshipDiary,createInternshipDiary,getSingleInternshipDiary,deleteInternshipDiary,updateInternshipDiary,getSingleInternshipDiaryByIndex
 }

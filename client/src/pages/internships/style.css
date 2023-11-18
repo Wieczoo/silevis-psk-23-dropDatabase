@@ -55,3 +55,22 @@ table {
 {
     height: 200px;
 }
+
+
+.hidden td div
+{
+
+    width: 50%;
+    display: inline-block;
+}
+.hidden td div p
+{
+    display: block;
+}
+.hidden td div img
+{
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+
+}
