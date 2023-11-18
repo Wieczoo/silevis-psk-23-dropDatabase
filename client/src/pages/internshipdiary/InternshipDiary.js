@@ -1,6 +1,8 @@
 import { useEffect, useState} from "react";
 import axios from "axios";
 
+import "./style.css";
+
 const InternshipDiary = () =>{
     const [data,setData] = useState();
     const [formData,setFormData] = useState();
@@ -43,11 +45,11 @@ const InternshipDiary = () =>{
         </tbody>
        </table>
         <div>
-            <label>Date</label>
-             <input name='day'  onChange={handleChange} type="date"></input>
+            <label>Date : </label>
+             <input name='day'  onChange={handleChange} type="date" className="inpucik"></input>
              <br></br>
              <label>Discription</label>
-            <textarea name='day'  onChange={handleChange} type="text">Discription </textarea>
+            <textarea name='day'  onChange={handleChange} type="text" className="inpucik">Discription </textarea>
             <button onClick={()=>{addNewDate()}} type="text">Add </button>
         </div>
        </div>

@@ -16,9 +16,14 @@ const Navbar = ({userType}) => {
         navigate('/login');
     }
 
-    const changeLang = () =>{
-        console.log('change');
-    }
+
+
+    const changeLang = (n) => {
+        const lang = {
+          "lang": n
+        };
+        localStorage.setItem("lang", JSON.stringify(lang));
+      };
 
     return(
 <>
@@ -29,8 +34,8 @@ const Navbar = ({userType}) => {
                 </div>
                 <div id="rightSide">
                     <div id="langOptions">
-                        <img src={pl_icon} alt="polish"/>
-                        <img src={en_icon} alt="english"/>
+                        <img src={pl_icon} alt="polish" onClick={()=>{changeLang("pl")}}/>
+                        <img src={en_icon} alt="english" onClick={()=>{changeLang("en")}}/>
                     </div>
                     <button id="signout" onClick={SignOut}>Sign Out</button>
                 </div>
