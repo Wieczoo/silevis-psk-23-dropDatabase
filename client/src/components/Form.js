@@ -178,7 +178,7 @@ const Form = () => {
     </html>
     `;
 
-    setHtmlContent(html2);
+    setHtmlContent(html);
   }, [formData]);
 
   return (

@@ -16,6 +16,7 @@ body
     width: 100vw;
     height: 100svh;
     background: rgb(243, 246, 248);
+    overflow-x: hidden;
 }
 
 

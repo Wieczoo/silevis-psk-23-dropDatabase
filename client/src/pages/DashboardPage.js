@@ -7,7 +7,7 @@ const Dashboard = () =>{
     const location = useLocation();
 
 
-    const status = location.state?.status || 'Brak statusu';
+    const status = location.state?.status || 'null';
     console.log(status);
 
     return(
