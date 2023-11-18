@@ -2,6 +2,7 @@
 import logo from "../assets/logo/logotyp-weaii-psk-1024x270.png";
 import pl_icon from "../assets/icons/poland.png";
 import en_icon from "../assets/icons/uk.png";
+
 import Menu from "./Menu";
 import { useNavigate } from "react-router-dom";
 

@@ -68,7 +68,6 @@ const { id } = req.params
     {
       $set: {
         'documentStaticText.en': req.body.documentStaticText.en,
-        'documentStaticText.pl': req.body.documentStaticText.pl
       },
       title: req.body.title
     },

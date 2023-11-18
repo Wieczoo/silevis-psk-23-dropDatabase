@@ -13,8 +13,15 @@ const getAllInternshipData = async (req, res) => {
     let internshipDataModel = req.body;
      internshipDataModel._id =  new ObjectId();
     
-   
+     internshipDataModel.form1 = Array();
+     if(internshipDataModel.applianceType == 1){
+      internshipDataModel.form1[0] = {"docTitle": "Umowa o organizację praktyki","status":"0","inputsList":[{'name':'studentname','namepl':'Imię','nameen':'First name','type':'text'}]};
+      internshipDataModel.form1[1] = {"docTitle": "Wniosek na wyrażenie zgody na realizację praktyki","status":"0","inputsList":[{'name':'studentname','namepl':'Imię','nameen':'First name','type':'text'}]};
+    } else if (internshipDataModel.applianceType == 2){
+      internshipDataModel.form1[0] = {"docTitle": "Wniosek o zaliczenie praktyki zawodowej","status":"0","inputsList":[{'name':'studentname','namepl':'Imię','nameen':'First name','type':'text'}]};
+    }
     const newInternshipDataModel = new InternshipDataModel(internshipDataModel)
+  
     await newInternshipDataModel.save();
     res.status(200).send(newInternshipDataModel);
  
@@ -23,8 +30,6 @@ const getAllInternshipData = async (req, res) => {
   const getSingleInternshipDataByIndex = async(req, res) => {
     const { index } = req.params
 
-    
-  
     const InternshipData = await InternshipDataModel.find({ 'student.index': index })
   
     if (!InternshipData) {

@@ -48,6 +48,7 @@ const UniversitySupervisor = () =>{
     return(
         <>
         <>
+        <div className="content">
         <h2>University Supervisor   <button onClick={() => {
                     setIsAdd(true);
                     setIsEdit(false)
@@ -80,6 +81,7 @@ const UniversitySupervisor = () =>{
             </div>
           ))}</a>
         }
+        </div>
         </>
         <>{isEdit &&
          <form >
@@ -133,6 +135,7 @@ const UniversitySupervisor = () =>{
           <br />
           <button onClick={addNewUniSupervisor} >Save</button>
         </form>}
+        
         </>
         </>
        

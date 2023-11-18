@@ -130,6 +130,22 @@ const internshipDataSchema = new mongoose.Schema({
     description: {
       type: String,
       required: false
+    },
+    form:{
+      type: Array,
+      required: false
+    },
+    form1State:{
+      type: String,
+      required: false
+    },
+    form2:{
+      type: Array,
+      required: false
+    },
+    form2State:{
+      type: String,
+      required: false
     }
 });
 
