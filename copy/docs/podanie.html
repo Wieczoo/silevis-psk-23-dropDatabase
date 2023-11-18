@@ -5,23 +5,56 @@
     <title>Zarz_R_54_19_zal_1</title>
   </head>
   <body>
-    <div style="float: left; width: 40%;">
+    <div style="float: left; width: 40%; margin-bottom: 100px; line-height: 1.5;">
         <p>
-            <b>{{student.name}}  {{student.surname}}</b>
+            <b>{{student.name}}  {{student.surname}}</b><br>
+            Pesel: <b>{{student.pesel}}</b><br>
+            Adres: <b> {{student.adres}} </b><br>
+            Nr. telefonu: <b>{{student.tel}}</b><br>
+            Kierunek studiów <b>{{student.fieldOfStudy}}</b><br>
         </p>
-
     </div>
-    <div>
-
+        
+    <div style="float: right; width: 60%; text-align: right; margin-bottom: 140px;">
+      <p>Kielce, {{date}}</p>
     </div>
-    <div>
+    
 
+    <div >
+      <p style="text-align: center; line-height: 1.5;">
+        <b>Kierownik<br>
+        ds.praktyk studenckich<br>
+        {{kierownik.name}} {{kierownik.surname}}</b>
+      </p>
     </div>
+      
     <div>
-
+      <p style="text-align: center;">
+        <b>Podanie<br></b>
+      </p>
+      <p style="text-align: left; line-height: 1.5;">
+        &#9;Uprzejmie proszę o wyrażenie zgody na realizację czterotygodniowej praktyki studenckiej w zakładzie:
+      </p>
+      <p style="text-align: center; line-height: 1.5; ">
+        <b>
+          {{company.name}} {{company.streat}} {{company.zipCode}} {{company.city}}<br>
+        </b>
+          Przedstawiciel zakładu: <b>{{company.supervisorName}} {{company.supervisorSurname}} {{company.supervisorTel}}</b><br>
+          Zakładowy opiekun praktyk: <b>{{company.supervisorName}} {{company.supervisorSurname}}</b> <br>
+          Data stażu: <b>{{apprenticeships.startDate}} {{apprenticeships.endDate}}</b> <br>
+      </p>
     </div>
-    <div>
 
+    <div style="float:right; margin-top: 30px;">
+      <p style="text-align: center;">
+        Z poważaniem<br>
+      </p>
+      <p style="text-align: center; margin-top: 40px;">
+        .....................................................<br>
+      </p>  
+      <p style="text-align: center;">
+        podpis studenta
+      </p>
     </div>
     
   </body>
