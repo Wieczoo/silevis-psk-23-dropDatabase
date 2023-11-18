@@ -33,7 +33,7 @@
 #formInputs{
     float: left;
     width: 60%;
-    height: calc(100% - 50px);
+    height: calc(100% - 50px - 1rem);
     background-color: white;
     padding: 1rem;
     box-sizing: border-box;
@@ -46,7 +46,7 @@
     overflow-y: scroll;
     float: left;
     width: 40%;
-    height: calc(100% - 50px);
+    height: calc(100% - 50px - 1rem);
     background-color: white;
 }
 

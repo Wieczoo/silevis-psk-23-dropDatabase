@@ -1,12 +1,14 @@
 import '../styles/form.css';
 import React, { useRef, useEffect, useState, useContext } from 'react';
-
+import axios from 'axios';
 import icon_close from '../assets/icons/close.png';
 import store from '../utils/store';
 
 const Form = () => {
   const mojDivRef = useRef(null);
   const [htmlContent, setHtmlContent] = useState('');
+
+  const [temporaryData,setTemporaryData] = useState();
 
 
   const {closeForm} = useContext(store);
@@ -90,13 +92,22 @@ const Form = () => {
   
 
   useEffect(() => {
+
+
+    axios.get('http://10.5.5.188:3001/api/htmltext')
+    .then((response) => {
+        console.log(response.data);
+        setTemporaryData(response.data);
+        
+    })
+    .catch((err) => {console.log(err)});
     const currentDateObj = new Date();
     const day = currentDateObj.getDate();
     const month = currentDateObj.getMonth() + 1;
     const year = currentDateObj.getFullYear();
 
     const currentDate = day+"."+month+"."+year+"r."
-    
+    const html2 = temporaryData
     const html = `
     <!DOCTYPE html>
     <html>
@@ -167,7 +178,7 @@ const Form = () => {
     </html>
     `;
 
-    setHtmlContent(html);
+    setHtmlContent(html2);
   }, [formData]);
 
   return (
