@@ -52,7 +52,7 @@ const Internships = () => {
               <React.Fragment key={index}>
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{item.student.index}</td>
+                  {/* <td>{item.student.index}</td> */}
                   <td>{item.student.fieldOfStudy}</td>
                   <td></td>
                   <td>

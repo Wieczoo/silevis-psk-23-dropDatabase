@@ -1,10 +1,18 @@
 {
     "pl":
     {
-        "Login" : "Zaloguj!"
+        "Login" : "Zaloguj!",
+        "Profile": "Profil",
+        "Interships" : "Staze",
+        "Supervisor": "Supervisor",
+        "Templates" :"Szablony"
     },
     "en":
     {
-        "Login" : "Sign In!"
+        "Login" : "Sign In!",
+        "Profile":"Profile",
+        "Interships" : "Interships",
+        "Supervisor": "Koordynator",
+        "Templates": "Templates"
     }
 }
