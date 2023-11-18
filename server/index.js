@@ -1,12 +1,16 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose');
-
+const routerTemplate = require('./routes/documentTemplates')
+const routerCompanyInfo = require('./routes/companyInfo')
+const routerInternship = require('./routes/InternshipRoute')
+const routerApprenticeshipsDates = require('./routes/ApprenticeshipsDatesRoutes')
+const routerInternshipDiary = require('./routes/InternshipDiaryRoutes')
 const app = express()
 
-const routerTemplate = require('./routes/documentTemplates')
 
-const port = 3000
+
+const port = 3001;
 
   app.use(express.json())
 
@@ -22,7 +26,11 @@ app.use((req, res, next) => {
 
 
   // routes
-app.use('/api',routerTemplate )
+app.use('/api/templates',routerTemplate )
+app.use('/api',routerCompanyInfo )
+app.use('/api/internship',routerInternship )
+app.use('/api/apprenticeshipsdates',routerApprenticeshipsDates)
+app.use('/api/internshipdiary',routerInternshipDiary);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
@@ -31,10 +39,7 @@ app.listen(port, () => {
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('connected to database')
-    // listen to port
-    app.listen(process.env.PORT, () => {
-      console.log('listening for requests on port', process.env.PORT)
-    })
+    
   })
   .catch((err) => {
     console.log(err)

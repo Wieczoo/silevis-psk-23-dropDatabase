@@ -11,10 +11,11 @@ const getDocumentTemplates = async (req, res) => {
 
   const createDocumentTemplates = async (req, res) => {
     try {
-      console.log(typeof(req.body));
+      console.log(req.body);
     console.log('1');
     let newDocumentTexts = {};
     newDocumentTexts._id =  new ObjectId();
+    newDocumentTexts.title =  req.body.title;
     newDocumentTexts.documentStaticText = {};
     newDocumentTexts.documentStaticText.pl = req.body.documentStaticText.pl;
     newDocumentTexts.documentStaticText.en = req.body.documentStaticText.en;
@@ -25,7 +26,63 @@ const getDocumentTemplates = async (req, res) => {
       res.status(400).json(error)
     }
   }
+  const getSingleDocumentTemplates = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({error: 'No such workout'})
+    }
   
+    const DocumentText = await DocumentTextModel.findById(id)
+  
+    if (!DocumentText) {
+      return res.status(404).json({error: 'No such workout'})
+    }
+  
+    res.status(200).json(DocumentText)
+  };
+  const deleteDocumentTemplates = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({error: 'No such workout'})
+    }
+  
+    const DocumentText = await DocumentTextModel.findOneAndDelete({_id: id})
+  
+    if(!DocumentText) {
+      return res.status(400).json({error: 'No such workout'})
+    }
+  
+    res.status(200).json(DocumentText)
+  };
+
+  const updateDocumentTemplates = async (req, res) => {
+const { id } = req.params
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({error: 'No such workout'})
+  }
+
+  const DocumentText = await DocumentTextModel.findOneAndUpdate(
+    { _id: id },
+    {
+      $set: {
+        'documentStaticText.en': req.body.documentStaticText.en,
+        'documentStaticText.pl': req.body.documentStaticText.pl
+      },
+      title: req.body.title
+    },
+    { upsert: true, new: true }
+  );
+
+  if (!DocumentText) {
+    return res.status(400).json({error: 'No such workout'})
+  }
+
+  res.status(200).json(DocumentText)
+  };
+
+
 module.exports = {
-  getDocumentTemplates,createDocumentTemplates
+  getDocumentTemplates,createDocumentTemplates,getSingleDocumentTemplates,deleteDocumentTemplates,updateDocumentTemplates
 }
