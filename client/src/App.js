@@ -16,6 +16,7 @@ import InternshipDiary from './pages/internshipdiary/InternshipDiary';
 import './styles/main.css';
 
 const App = () =>{
+    localStorage.setItem('lang','pl')
     // useEffect(()=>{
     //     if (localStorage.getItem("lang") === null) {
     //         const defaultLang={

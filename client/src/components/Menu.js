@@ -43,9 +43,11 @@ const Menu = ({type}) =>{
                 break;
         }
 
+
+
     },[]);
-    const [active, setActive] = useState();
-    return(
+
+    return( 
         <div id="menuLine">
             <div className="content">
             <div id="menu">
@@ -58,8 +60,6 @@ const Menu = ({type}) =>{
                 ) : (
                     <>
                     <div className="menuPart active" onClick={() => { navigate('/dashboard/documents') }}><a>Documents</a></div>
-                    <div className="menuPart"><a>Part 2</a></div>
-                    <div className="menuPart"><a>Part 3</a></div>
                     <div className="menuPart" onClick={() => { navigate('/dashboard/internshipdiary') }}><a>Internship Diary</a></div>
                     <div className="menuPart" onClick={() => { navigate('/dashboard/profile') }}><a>Profile</a></div>
                     <div className={menuActive==3? "menuPart active" : "menuPart"} onClick={() => { setMenuActive(3);navigate('/dashboard/documents') }}><a>Documents</a></div>
@@ -70,7 +70,7 @@ const Menu = ({type}) =>{
                     <div className={menuActive==4? "menuPart active" : "menuPart"} onClick={() => { setMenuActive(4);navigate('/dashboard/profile') }}><a>Profile</a></div>
                 </div>
             </div>
-           
+           q
         </div>
     );
 }
