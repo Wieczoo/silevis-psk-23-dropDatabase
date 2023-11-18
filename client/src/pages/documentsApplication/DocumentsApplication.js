@@ -14,6 +14,7 @@ const DocumentsAppliactionPage = () =>{
     const [applianceView,setApplianceView] = useState(false);
     const [formView, setFormView] = useState(false);
     const [myApplications, setMyApplications] = useState([]);
+    const [applicationId, setApplicationId] = useState();
 
     const [applicationTitle,setApplicationTitle] = useState(false);
 
@@ -35,8 +36,10 @@ const DocumentsAppliactionPage = () =>{
         setRefresh(true);
     }
 
-    const openForm = () => {
+    const openForm = (id) => {
+        setApplicationId(id);
         setFormView(true);
+        
     }
     const closeForm = () =>{
         setFormView(false);
@@ -97,7 +100,7 @@ const DocumentsAppliactionPage = () =>{
                             <div id='container'>
                                 <a>Wymagane dokumenty:</a>
                                 <div className='doc'>
-                                    <p onClick={()=>{openForm()}}>Wniosek</p>
+                                    <p onClick={()=>{openForm(item._id)}}>Wniosek</p>
                                     <div className='status'><input type='checkbox'/></div>
                                 </div>
 
@@ -143,7 +146,7 @@ const DocumentsAppliactionPage = () =>{
 
 
             </div>
-            {formView && <Form/>}
+            {formView && <Form applicationID={applicationId}/>}
             </store.Provider>
         </>
     );

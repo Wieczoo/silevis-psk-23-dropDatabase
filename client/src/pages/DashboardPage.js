@@ -4,11 +4,9 @@ import Navbar from '../components/Navbar';
 
 
 const Dashboard = () =>{
+
     const location = useLocation();
-
-
     const status = location.state?.status || 'null';
-    console.log(status);
 
     return(
         <>

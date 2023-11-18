@@ -4,17 +4,12 @@ import axios from 'axios';
 import icon_close from '../assets/icons/close.png';
 import store from '../utils/store';
 
-const Form = () => {
+const Form = ({applicationID}) => {
+
   const mojDivRef = useRef(null);
   const [htmlContent, setHtmlContent] = useState('');
-
   const [temporaryData,setTemporaryData] = useState();
-
-
   const {closeForm} = useContext(store);
-  
-
-
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
@@ -75,6 +70,39 @@ const Form = () => {
     }));
   };
 
+  const saveDataApplication = () =>{
+
+    axios.patch('http://10.5.5.188:3001/api/internship/'+applicationID,{
+        company:{
+            name: formData.company.name,
+            city: formData.company.city,
+            street: formData.company.street,
+            krs: formData.company.krs,
+            nip: formData.company.nip,
+            regon: formData.company.regon,
+            supervisor:{
+                name: formData.company.supervisorName,
+                surname: formData.company.supervisorSurname,
+                tel: formData.company.supervisorTel.replace,
+                email: formData.company.supervisorEmail
+            }
+        },
+        university:{
+            supervisor:{
+                name: formData.university.supervisorName,
+                surname: formData.university.supervisorSurname,
+                tel: formData.university.supervisorTel,
+                email: formData.university.supervisorEmail
+            }
+        },
+        apprenticeships:{
+            startDate: formData.startDate,
+            endDate: formData.endDate
+        }
+    }).then(function(response){console.log(response)})
+    .catch(function(error){console.log(error)});
+  }
+
 
   const handleUniversityChange = (e) => {
     const { name, value } = e.target;
@@ -103,6 +131,14 @@ const Form = () => {
     e.preventDefault();
     // Tutaj możesz przekazać dane do innej funkcji lub komponentu, aby je obsłużyć
     console.log('Wysyłanie danych:', formData);
+    saveDataApplication();
+
+
+    axios.post('',{})
+    .then(function(response){})
+    .catch({function(error){console.log(error)}})
+
+    // applicationID
   };
 
   
