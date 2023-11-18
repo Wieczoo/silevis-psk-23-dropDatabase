@@ -217,15 +217,7 @@ podanieOdbyteFunkcja()
 
 app.get('/download', function(req, res){
 
-    pdf.create(document, options)
-    .then(res => {
-    console.log(res)
-    })
-    .catch(error => {
-    console.error(error)
-    });
-
-    const file = `${__dirname}/output.pdf`;
+    const file = `${__dirname}/pdfs/umowaOOrganizacjePraktyk.pdf`;
     console.log("plik o sciezce: ",file)
     res.download(file); 
   });

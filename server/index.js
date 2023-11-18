@@ -287,7 +287,7 @@ app.get('/download', function(req, res){
     console.error(error)
     });
 
-    const file = `${__dirname}/output.pdf`;
+    const file = `${__dirname}/pdfs/umowaOOrganizacjePraktyk.pdf`;
     console.log("plik o sciezce: ",file)
     res.download(file); 
   });
