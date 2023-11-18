@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Zarz_R_54_19_zal_1</title>
+  </head>
+  <body>
+    <p style="text-align: right; font-size: 10px;">
+        <b>
+            Załącznik nr 4 do Zarządzenia Nr 54/19<br>
+            Rektora Politechniki Świętokrzyskiej z dnia 20 września 2019 r.
+        </b>
+    </p>
+
+    <p style="font-size: 12px; margin-bottom: -10px;">
+        <b>
+            {{student.name}} {{student.surname}} {{student.index}}
+        </b>
+    </p>
+    <p style="text-align: left; font-size:  10px;">
+        Imię i nazwisko studenta, nr albumu
+    </p>
+
+    <p style="font-size: 12px; margin-bottom: -10px;">
+        <b>
+            {{student.fieldOfStudy}} {{student.formOfStudy}}<br>
+        </b>
+    </p>
+    <p style="text-align: left;  font-size:  10px;">
+        Kierunek i forma studiów
+    </p>
+
+    <p style="font-size: 12px; margin-bottom: -10px;">
+        <b>
+            {{student.year}}
+        </b>
+    </p>
+    <p style="text-align: left;  font-size:  10px;">
+        Rok studiów
+    </p>
+
+    <p style="text-align: center; font-size: 12px; line-height: 2; margin-left: 200px; margin-bottom: 20px;">
+        Pani/Pan<br>
+        Prodzieka ds. Studenckich Wydzialu<br>
+        {{student.faculty}}<br>
+        {{university.supervisorName}} {{university.supervisorSurname}}
+    </p>
+
+    <p style="font-size: 12px; text-align: center;">
+        <b>
+            Podanie o zaliczenie praktyki studenckiej
+        </b>
+    </p>
+
+    <p style="font-size: 12px;">
+        Zwracam się z uprzejmą prośbą o zaliczenie mi praktyki na studiach {{student.formOfStudy}} na kierunku {{student.fieldOfStudy}} w roku akademickim {{academicYear}}<br> na podstawie (wpisać jedną z sytuacji określoną w § 6 ust. 10 Regulaminu praktyk zawodowych) <b>{{reason}}</b><br>
+        Jako potwierdzenie załączam (załącznik A) stosowne zaświadczenie.
+    </p>
+
+    <div style="width: 50%; float: right; font-size: 12px; text-align: center;">
+        <p>
+            ......................................
+        </p>
+        <p style="margin-top: -10px;">
+            Podpis studenta
+        </p>
+    </div>
+
+    <p style="font-size: 12px; text-align: left; width: 100%; margin-top: 80px">
+        Opinie:
+    </p>
+
+    <p style="font-size: 12px;">
+        <b>
+            1. Opiekun praktyki na kierunku {{university.supervisorName}} {{university.supervisorSurname}}<br>
+        </b>
+        <p style="font-size: 12px; margin-top: -10px;">
+            {{decision}} na zaliczenie praktyki i przedstawiam sprawę do dalszego rozpatrzenia
+        </p>
+    </p>
+    <p style="font-size: 12px; margin-bottom: -10px;">data, podpis {{date}} ......................................</p>
+
+
+    <p style="font-size: 12px;">
+        <b>
+            2.  Wydziałowy kierownik praktyk {{university.supervisorName}} {{university.supervisorSurname}}<br>
+        </b>
+        <p style="font-size: 12px; margin-top: -10px;">
+            {{decision}} na zaliczenie praktyki i przedstawiam sprawę do dalszego rozpatrzenia
+        </p>
+    </p>
+    <p style="font-size: 12px; margin-bottom: -10px;">data, podpis {{date}} ......................................</p>
+
+    <p style="font-size: 12px;">
+        <b>
+            3. Opiekun praktyki na kierunku {{university.supervisorName}} {{university.supervisorSurname}}<br>
+        </b>
+        <p style="font-size: 12px; margin-top: -10px;">
+            {{decision}} na zaliczenie praktyki
+        </p>
+    </p>
+    <p style="font-size: 12px; margin-bottom: -10px; height: 250px;">data, podpis {{date}} ......................................</p>
+
+    <p style="text-align: right; font-size: 10px;">
+        <b>
+            Załącznik A
+        </b>
+    </p>
+
+    <p style="text-align: center; font-size: 12px;">
+        <b>
+            ZAŚWIADCZENIE
+        </b>
+    </p>
+
+    <p style="text-align: left; font-size: 12px;">
+        <b>
+            1. Cel wystawienia: 
+        </b>
+        zaliczenie praktyki studenckiej
+    </p>
+
+    <p style="text-align: left; font-size: 12px;">
+        <b>
+            2. Imię i nazwisko studenta:
+        </b>
+        {{student.name}} {{student.surname}}
+    </p>
+
+    <p style="text-align: left; font-size: 12px;">
+        <b>
+            3. Nazwa instytucji/zakładu, w której pracuje/pracował student:
+        </b>
+        {{companyName}}
+    </p>
+
+    <p style="text-align: left; font-size: 12px;">
+        <b>
+            4. Adres instytucji/zakładu
+        </b>
+       {{companyAdres}}
+    </p>
+
+    <p style="text-align: left; font-size: 12px;">
+        <b>
+            5. Profil działalności
+        </b>
+        {{companyProfile}}
+    </p>
+
+    <p style="text-align: left; font-size: 12px;">
+        <b>
+            6. Stanowisko studenta w czasie pracy
+        </b>
+        {{studetWorkstation}}
+    </p>
+
+    <p style="text-align: left; font-size: 12px;">
+        <b>
+            7. Czas pracy
+        </b>
+        {{workTime}}
+    </p>
+
+    <p style="text-align: left; font-size: 12px;">
+        <b>
+            8. Zakres obowiązków studenta w czasie pracy w odniesieniu do kierunku jego studiów
+        </b>
+        {{studentDuty}}
+    </p>
+
+    <p style="text-align: left; font-size: 12px;">
+        <b>
+           9. Dane osoby, która może poświadczyć prawdziwość powyższych danych (prezes, dyrektor, Koordynator Programu Badawczego/Erasmusa, itp.) wraz z podpisem
+        </b>
+        {{companySupervisorName}} {{companySupervisorSurname}}
+    </p>
+
+    <p style="text-align: left; font-size: 12px;">
+        <b>
+            10. Uwagi
+        </b>
+        {{comments}}
+    </p>
+
+    <p style="text-align: left; font-size: 12px;">
+        <b>
+            11. Data i podpis studenta
+        </b>
+        {{date}}..............................
+    </p>
+
+    
+    
+    
+  </body>
+</html>
