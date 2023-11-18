@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {useNavigate} from 'react-router-dom';
-
+import text from '../language/language.json';
 
 const Menu = ({type}) =>{
 
@@ -8,10 +8,15 @@ const Menu = ({type}) =>{
     const [userType, setUserType] = useState();
 
     const [menuActive, setMenuActive] = useState(0);
+    const [language, setLanguage] = useState();
+
+   
 
     useEffect(()=>{
         const user = JSON.parse(localStorage.getItem("user"));
-
+        const lang = JSON.parse(localStorage.getItem("lang"));
+        setLanguage(lang);
+        console.log(language);
         setUserType(user.staffStatus);
 
         const currentUrl = window.location.href;

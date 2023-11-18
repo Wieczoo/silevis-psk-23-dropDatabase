@@ -1,0 +1,15 @@
+.inpucik
+{
+    padding: 0.5rem 1rem;
+    border: 1px solid #818181;
+    font-size: 16px;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+label
+{
+    margin-top: 20px;
+    display: block;
+
+}
