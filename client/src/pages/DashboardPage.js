@@ -7,12 +7,12 @@ const Dashboard = () =>{
     const location = useLocation();
 
 
-
-    console.log()
+    const status = location.state?.status || 'Brak statusu';
+    console.log(status);
 
     return(
         <>
-            <Navbar userDatae="xD" />
+            <Navbar userType={status} />
             <Outlet/>
         </>
         

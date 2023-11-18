@@ -2,9 +2,9 @@
 import logo from "../assets/logo/logotyp-weaii-psk-1024x270.png";
 
 import Menu from "./Menu";
-const Navbar = ({data}) => {
+const Navbar = ({userType}) => {
 
-    console.log(data);
+    console.log(userType);
 
     return(
 <>
@@ -15,7 +15,7 @@ const Navbar = ({data}) => {
                 </div>
             </div>
         </div>
-        <Menu/>
+        <Menu userType={userType}/>
        </>
     );   
 }
