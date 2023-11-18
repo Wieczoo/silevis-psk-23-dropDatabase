@@ -28,6 +28,7 @@ const Menu = ({type}) =>{
                     <div className="menuPart active" onClick={() => { navigate('/dashboard/documents') }}><a>Documents</a></div>
                     <div className="menuPart"><a>Part 2</a></div>
                     <div className="menuPart"><a>Part 3</a></div>
+                    <div className="menuPart" onClick={() => { navigate('/dashboard/internshipdiary') }}><a>Internship Diary</a></div>
                     <div className="menuPart" onClick={() => { navigate('/dashboard/profile') }}><a>Profile</a></div>
                     </>
                 )}

@@ -7,6 +7,7 @@ import DocumentsTemplates from './pages/documentsTemplates/DocumentsTemplates';
 import UniversitySupervisor from './pages/universitySupervisor/UniversitySupervisor';
 import DocumentsTexts from './pages/documentTexts/documentsTexts';
 import DocumentsAppliactionPage from './pages/documentsApplication/DocumentsApplication';
+import InternshipDiary from './pages/internshipdiary/InternshipDiary';
 import './styles/main.css';
 import { useEffect } from 'react';
 const App = () =>{
@@ -35,6 +36,7 @@ const App = () =>{
                     <Route path='profile' element={<ProfilePage/>}/>
                     <Route path='universitysupervisor' element={<UniversitySupervisor/>}/>
                     <Route path='documentstexts' element={<DocumentsTexts/>}/>
+                    <Route path='internshipdiary' element={<InternshipDiary/>}/>
                 </Route>
                
 

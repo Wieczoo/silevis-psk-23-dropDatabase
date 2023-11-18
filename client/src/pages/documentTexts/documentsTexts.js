@@ -7,7 +7,7 @@ const DocumentsTexts = () =>{
     const [isAdd,setIsAdd] = useState(false);
     const [currentId,setCurrentId] = useState("");
     useEffect(()=>{
-        axios.get("http://10.5.5.188:3001/api/universitysupervisor",
+        axios.get("http://10.5.5.188:3001/api/documentstext",
         {responseType: "json"})
         .then((response) => {
             console.log(response.data);
@@ -22,7 +22,7 @@ const DocumentsTexts = () =>{
       };
 
       const addNewUniSupervisor = () =>{
-        axios.post('http://10.5.5.188:3001/api/documentstext',formData);
+        axios.post('http://10.5.5.188:3001/api/documentstext',handleSave());
         debugger;
       }
 
@@ -41,38 +41,44 @@ const DocumentsTexts = () =>{
         en: ''
       });
       const handleSave = () => {
-        return ({
+        return {
           title: formData.title,
           documentStaticText: {
-            en: formData.enText,
-            pl: formData.plText
+            en: formData.en,
+            pl: formData.pl
           }
-        });
+        };
       };
     
 
     return(
         <>
         <>
-        <h2>University Supervisor   <button onClick={() => {
+        <h2>Translations   <button onClick={() => {
                     setIsAdd(true);
                     setIsEdit(false)
-               }}>Add new</button><button onClick={() => {
-                setIsAdd(false);
-                setIsEdit(false)
-           }}>Back</button></h2>
+               }}>Add new</button>
+              {(isEdit || isAdd) &&
+                        <button onClick={() => {
+                            setIsAdd(false);
+                            setIsEdit(false)
+                        }}>Back</button>
+              } 
+              
+           
+           </h2>
         {(data && !isEdit && !isAdd) && 
         <a>{data.map(entry => (
             <div className="supervisorDataRow" key={entry.email}>
                 <div>
                     <p>Title: {entry.title}</p>
-                    <p>pl: {entry.documentStaticText.pl}</p>
-                    <p>en: {entry.documentStaticText.en}</p>
+                    <p>polish: {entry.documentStaticText.pl}</p>
+                    <p>english: {entry.documentStaticText.en}</p>
                 </div>
                <>
                <button onClick={() => {
                     setCurrentId(entry._id);
-                    formData.name =entry.title;
+                    formData.title =entry.title;
                     formData.pl =entry.documentStaticText.pl;
                     formData.en =entry.documentStaticText.en;
                     setIsEdit(true);
@@ -94,12 +100,12 @@ const DocumentsTexts = () =>{
          </label>
          <br />
          <label>
-           pl:
+           polish:
            <input type="text" name="pl" value={formData.pl} onChange={handleChange} />
          </label>
          <br />
          <label>
-           en:
+           english:
            <input type="text" name="en" value={formData.en} onChange={handleChange} />
          </label>
          <br />
@@ -114,20 +120,19 @@ const DocumentsTexts = () =>{
         <>
             {isAdd &&  <form >
           <label>
-            Name:
+            Title:
             <input type="text" name="title" value={formData.title} onChange={handleChange} />
           </label>
           <br />
           <label>
-            Surname:
+            Polish:
             <input type="text" name="pl" value={formData.pl} onChange={handleChange} />
           </label>
           <br />
           <label>
-            Email:
+            English:
             <input type="text" name="en" value={formData.en} onChange={handleChange} />
           </label>
-          
          
           <br />
           <button onClick={addNewUniSupervisor} >Save</button>

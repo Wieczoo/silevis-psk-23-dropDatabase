@@ -62,13 +62,13 @@ const { id } = req.params
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({error: 'No such workout'})
   }
-
+console.log(req.body);
   const DocumentText = await DocumentTextModel.findOneAndUpdate(
     { _id: id },
     {
       $set: {
-        'documentStaticText.en': req.body.documentStaticText.en,
-        'documentStaticText.pl': req.body.documentStaticText.pl
+        'documentStaticText.en': req.body.en,
+        'documentStaticText.pl': req.body.pl
       },
       title: req.body.title
     },
