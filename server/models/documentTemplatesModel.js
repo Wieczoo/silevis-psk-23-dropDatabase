@@ -11,6 +11,10 @@ title:{
     textOrder:{
         type: Array,
         required: true
+      },
+      type: {
+        type: String,
+        required: true
       }
 });
 module.exports = mongoose.model('DocumentTemplatesModel', documentTemplatesSchema,'documentTemplates')

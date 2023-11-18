@@ -4,7 +4,8 @@ import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/auth/LoginPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import DocumentsTemplates from './pages/documentsTemplates/DocumentsTemplates';
-
+import UniversitySupervisor from './pages/universitySupervisor/UniversitySupervisor';
+import DocumentsTexts from './pages/documentTexts/documentsTexts';
 import DocumentsAppliactionPage from './pages/documentsApplication/DocumentsApplication';
 import './styles/main.css';
 const App = () =>{
@@ -20,7 +21,10 @@ const App = () =>{
                     <Route path='templates' element={<DocumentsTemplates/>}/>
                     <Route path='documents' element={<DocumentsAppliactionPage/>}/>
                     <Route path='profile' element={<ProfilePage/>}/>
+                    <Route path='universitysupervisor' element={<UniversitySupervisor/>}/>
+                    <Route path='documentstexts' element={<DocumentsTexts/>}/>
                 </Route>
+               
 
 
                 {/* <Route path='*' element={}/> */}
