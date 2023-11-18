@@ -7,6 +7,8 @@ const routerInternship = require('./routes/InternshipRoute')
 const routerApprenticeshipsDates = require('./routes/ApprenticeshipsDatesRoutes')
 const routerInternshipDiary = require('./routes/InternshipDiaryRoutes')
 const routerDocumentsTemplates = require('./routes/documentsTemplatesRoutes')
+const routesHtmlText = require('./routes/htmlTextRoutes');
+const routesUniversitySupervisor = require('./routes/UniversitySupervisor')
 const app = express()
 const cors = require('cors')
 
@@ -48,6 +50,8 @@ app.use('/api/internship',routerInternship )
 app.use('/api/apprenticeshipsdates',routerApprenticeshipsDates)
 app.use('/api/internshipdiary',routerInternshipDiary);
 app.use('/api/documentstemplates',routerDocumentsTemplates)
+app.use('/api/htmltext',routesHtmlText)
+app.use('/api/universitysupervisor',routesUniversitySupervisor)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
