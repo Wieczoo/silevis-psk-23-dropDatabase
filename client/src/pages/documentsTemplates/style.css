@@ -1,0 +1,27 @@
+h2.pageTitle{
+    margin-top: 1rem;
+}
+
+.activity
+{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+button
+{
+    background:#EF7A1B;
+    border-radius: 10px;
+    border: 0px;
+    font-size: 16px;
+    padding: 0.5rem 1rem;
+    color: white;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+button:hover
+{
+    background: #bf6115;
+}

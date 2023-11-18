@@ -2,6 +2,7 @@
 import './style.css';
 import { useState } from 'react';
 import Form from '../../components/Form';
+import store    from "../../utils/store";
 const DocumentsAppliactionPage = () =>{
 
     const [optionsView,setOptionsView] = useState(false);
@@ -26,9 +27,17 @@ const DocumentsAppliactionPage = () =>{
     const openForm = () => {
         setFormView(true);
     }
+    const closeForm = () =>{
+        setFormView(false);
+    }
 
     return(
         <>
+        <store.Provider
+        value={{
+            closeForm,
+            }}>
+
             <div className="content">
                 <h2 className="pageTitle">Appliaction</h2>
                 {newAppliance && <div id="newApplication" onClick={displayOptions}>+</div>}
@@ -63,7 +72,7 @@ const DocumentsAppliactionPage = () =>{
 
             </div>
             {formView && <Form/>}
-
+            </store.Provider>
         </>
     );
 }

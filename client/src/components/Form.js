@@ -1,11 +1,15 @@
 import '../styles/form.css';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
 
+import icon_close from '../assets/icons/close.png';
+import store from '../utils/store';
 
 const Form = () => {
   const mojDivRef = useRef(null);
   const [htmlContent, setHtmlContent] = useState('');
 
+
+  const {closeForm} = useContext(store);
   
 
 
@@ -59,6 +63,8 @@ const Form = () => {
   const handleNip = (e) =>{
     setFormData(formData.company)
   }
+
+ 
 
   const handleCompanyChange = (e) => {
     const { name, value } = e.target;
@@ -167,12 +173,16 @@ const Form = () => {
   return (
     <div id='formBg'>
       <div id="formView">
-        <div>
-          <div>titel</div>
+        <div id='mainContainer'>
+
+          <div id='FormTitle'>
+              <h2>Title</h2>
+              <img id='close' src={icon_close} alt="close" onClick={closeForm}></img>
+          </div>
           <div id='formInputs' ref={mojDivRef}>
           <div>
-      <h2>Formularz</h2>
-      <form onSubmit={handleSubmit}>
+      <h3>Formularz</h3>
+      <form id='formInputsContainer' onSubmit={handleSubmit}>
         <label htmlFor="name">Imię:</label>
         <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
 
@@ -297,7 +307,7 @@ const Form = () => {
           <div id='formPreview' dangerouslySetInnerHTML={{ __html: htmlContent }}></div>
         </div>
       </div>
-      <div id='acceptanceForm'><button>Save</button></div>
+     
     </div>
   );
 }
