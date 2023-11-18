@@ -7,7 +7,19 @@ import DocumentsTemplates from './pages/documentsTemplates/DocumentsTemplates';
 
 import DocumentsAppliactionPage from './pages/documentsApplication/DocumentsApplication';
 import './styles/main.css';
+import { useEffect } from 'react';
 const App = () =>{
+
+
+    // useEffect(()=>{
+    //     if (localStorage.getItem("lang") === null) {
+    //         const defaultLang={
+    //             lang:"pl"
+    //         }
+    //         localStorage.setItem(defaultLang);
+    //     }
+       
+    // },[])
 
 
 
