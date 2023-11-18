@@ -4,14 +4,8 @@ import axios from 'axios';
 import icon_close from '../assets/icons/close.png';
 import store from '../utils/store';
 
-const Form = ({applicationID,applicationType, Title}) => {
-  
-
-  const [docTitle, setdocTitle] = useState(Title);
-
-  const [visible1, setVisible1] = useState(true);
-
-
+const Form = ({applicationID,applicationType, applicationTitle}) => {
+    console.log(applicationTitle);
 
   const mojDivRef = useRef(null);
   const [htmlContent, setHtmlContent] = useState('');
@@ -46,11 +40,6 @@ const Form = ({applicationID,applicationType, Title}) => {
 
   const [supervisors, setSupervisors] = useState([]);
   const [selectedSupervisor, setSelectedSupervisor] = useState([]);
-
-
-  useEffect(() => {
-    
-  }, [docTitle]);
 
   const fetchData = async (nip) => {
     try {
@@ -239,9 +228,6 @@ const Form = ({applicationID,applicationType, Title}) => {
       case 'Mangoes':
       case 'Papayas':
 */
-
-
-
     const html = `
     <!DOCTYPE html>
     <html>
@@ -311,21 +297,8 @@ const Form = ({applicationID,applicationType, Title}) => {
       </body>
     </html>
     `;
-
-    if(docTitle === "Wniosek na wyrażenie zgody na realizację praktyki"){
-      setVisible1(false)
-      console.log("widocznosc", visible1)
-      setHtmlContent(" ");
-      
-    }else{
-      setVisible1(true) 
-      setHtmlContent(html);
-    }
-
-    
+    setHtmlContent(html);
   }, [formData]);
-
-
 
   return (
     <div id='formBg'>
@@ -333,10 +306,10 @@ const Form = ({applicationID,applicationType, Title}) => {
         <div id='mainContainer'>
 
           <div id='FormTitle'>
-              <h2>{applicationType==2 ? "Podanie o Praktyki": "Podanie o Zaliczenie"}  {Title}</h2>
+              <h2>{applicationType==2 ? "Podanie o Praktyki": "Podanie o Zaliczenie"}  {applicationTitle}</h2>
               <img id='close' src={icon_close} alt="close" onClick={closeForm}></img>
           </div>
-          <div id='formInputs' ref={mojDivRef} style={{ visibility: visible1 ? "visible" : "hidden" }}>
+          <div id='formInputs' ref={mojDivRef}>
           <div>
       <h3>Formularz</h3>
       <form id='formInputsContainer' onSubmit={handleSubmit}>

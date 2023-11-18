@@ -17,10 +17,21 @@ const ProfilePage = () =>{
 
     return(
         <>
-        <h2>Profil</h2>
-        {data && 
-        <a>{data.firstName}</a>
-        }
+         <div className="content">
+                <h2 className="pageTitle">User Profile</h2>
+                <div id="userData">
+                    {data && 
+                    <>
+                        <a>Firstname: {data.firstName}</a><br></br>
+                        <a>Lastname: {data.lastName}</a><br></br>
+                        <a>Role: {data.staffStatus!=2 ? "Student" : "Pracownik Uczelni"}</a><br></br>
+                    </>}
+                    </div>
+            
+            
+        </div>
+       
+        
         </>
        
 
