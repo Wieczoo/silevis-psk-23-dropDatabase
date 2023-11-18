@@ -19,7 +19,7 @@ const DocumentsAppliactionPage = () =>{
     const [formView, setFormView] = useState(false);
     const [myApplications, setMyApplications] = useState([]);
     const [applicationId, setApplicationId] = useState();
-    const [applcationDocumentTitle, setApplcationDocumentTitle] = useState();
+    const [applcationDocumentTitle, setApplcationDocumentTitle] = useState([]);
 
     const [applicationTitle,setApplicationTitle] = useState(false);
     const [applicationType, setApplicationType] = useState();
@@ -44,10 +44,13 @@ const DocumentsAppliactionPage = () =>{
 
     const openForm = (id,x,title) => {
         setApplicationId(id);
-        setApplcationDocumentTitle(title);
+        setApplcationDocumentTitle(title.docTitle);
         setFormView(true);
         
     }
+
+    
+
     const closeForm = () =>{
         setFormView(false);
     }
@@ -163,7 +166,7 @@ const DocumentsAppliactionPage = () =>{
                 </div>}
                 </div>
             </div>
-            {formView && <Form applicationID={applicationId} title={applcationDocumentTitle}/>}
+            {formView && <Form applicationID={applicationId} Title={applcationDocumentTitle}/>}
             </store.Provider>
         </>
     );
