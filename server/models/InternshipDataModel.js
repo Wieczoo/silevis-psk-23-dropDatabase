@@ -14,7 +14,28 @@ const internshipDataSchema = new mongoose.Schema({
         index: {
             type: String,
             required: false
-          }
+          },
+          pesel: {
+            type: String,
+            required: false
+          },
+          fieldOfStudy: {
+            type: String,
+            required: false
+          },
+          faculty:{
+            type: String,
+            required: false
+          },
+          formOfStudy:{
+            type: String,
+            required: false
+          },
+          year:{
+            type: String,
+            required: false
+          },
+
     },
     company: {
         name: {
@@ -77,6 +98,10 @@ const internshipDataSchema = new mongoose.Schema({
             email: {
                 type: String,
                 required: false
+              },
+              supervisorFaculty:{
+                type: String,
+                required: false
               }
         }
     },
@@ -97,7 +122,15 @@ const internshipDataSchema = new mongoose.Schema({
     applianceType:{
             type: Number,
             required: false
-          }
+          },
+    dean:{
+      type: String,
+      required: false
+    },
+    description: {
+      type: String,
+      required: false
+    }
 });
 
 // Model mongoose na podstawie schematu
